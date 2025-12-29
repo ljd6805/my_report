@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-방산 중장기 투자 전략 리포트 (최종본)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        h1, h2, h3, h4 {
+            font-weight: 700;
+        }
+        h2 {
+            font-size: 1.875rem; /* 30px */
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(to right, #1e3a8a, #2563eb);
+            color: white;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        h2 svg {
+            margin-right: 0.75rem;
+            width: 2rem;
+            height: 2rem;
+        }
+        h3 {
+            font-size: 1.5rem; /* 24px */
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid #1D4ED8;
+            padding-left: 0.75rem;
+        }
+        h4 {
+            font-size: 1.25rem; /* 20px */
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+        .chart-container, .info-box {
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: #f9fafb;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 0.75rem;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+        th {
+            background-color: #f3f4f6;
+        }
+        article p, article li {
+            line-height: 1.8;
+            color: #374151;
+        }
+        .portfolio-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            background-color: white;
+            transition: transform 0.2s, box-shadow 0.2s;
+            height: 100%;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="bg-white p-6 sm:p-10 rounded-lg shadow-xl">
+            <header class="text-center mb-12">
+                <h1 class="text-5xl font-extrabold text-blue-900">K-방산 중장기 투자 전략</h1>
+                <p class="text-xl text-gray-600 mt-4">새로운 지정학적 시대의 구조적 성장 논제</p>
+                <p class="text-sm text-gray-500 mt-2">발간일: 2025년 8월 12일</p>
+            </header>
+
+            <article class="prose lg:prose-xl max-w-none">
+                
+                <!-- 서론 -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                        서론: 단기 조정의 배경과 중장기 투자의 기회
+                    </h2>
+                    <p>2025년 상반기 강력한 상승세를 보였던 K-방산 주식은 8월 초, 섹터 전반에 걸친 급격한 단기 조정을 경험했습니다. 이는 구조적 성장 스토리의 훼손이 아닌, <strong>2분기 실적의 기대치 하회(어닝 쇼크)</strong>, <strong>밸류에이션 부담에 따른 차익 실현</strong>, <strong>일시적인 지정학적 리스크 완화 우려</strong> 등 단기 요인이 복합적으로 작용한 결과입니다. 본 보고서는 이러한 단기 변동성이 K-방산의 중장기 펀더멘털을 훼손하는 구조적 문제가 아니며, 오히려 장기 투자자에게 <strong>매력적인 진입 기회</strong>를 제공한다고 판단합니다.</p>
+                    <div class="info-box grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-red-600">단기 조정 요인 (Short-term Headwinds)</h4>
+                            <ul class="list-disc list-inside mt-2">
+                                <li><strong>LIG넥스원 2Q25 어닝 쇼크:</strong> 영업이익 776억 원으로 컨센서스(856억) 9.3% 하회</li>
+                                <li><strong>풍산 2Q25 어닝 쇼크:</strong> 영업이익 936억 원으로 컨센서스(1,115억) 20% 하회</li>
+                                <li>연초 이후 주가 급등에 따른 밸류에이션 부담</li>
+                                <li>기관/외국인 중심의 차익 실현 매물 출회</li>
+                                <li>우크라이나 종전 협상 가능성 등 지정학적 리스크 완화 우려</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-green-600">중장기 성장 동력 (Long-term Tailwinds)</h4>
+                            <ul class="list-disc list-inside mt-2">
+                                <li>글로벌 재무장 슈퍼사이클 지속 (NATO GDP 2%룰 등)</li>
+                                <li>압도적인 수주잔고에 기반한 장기 성장 가시성</li>
+                                <li>'가용성 프리미엄'을 필두로 한 독보적 경쟁 우위</li>
+                                <li>수출입은행법 개정 등 강력한 정책 지원</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 섹션 1: Executive Summary -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" /></svg>
+                        섹션 1: Executive Summary
+                    </h2>
+                    <h3>투자 논제: 3대 성장 동력이 이끄는 구조적 성장 사이클</h3>
+                    <p>대한민국 방위산업(이하 K-방산) 섹터에 대해 <strong>비중확대(Overweight)</strong> 의견으로 커버리지를 개시합니다. K-방산은 <strong>①글로벌 재무장 슈퍼사이클</strong>, <strong>②독보적인 경쟁 우위</strong>, <strong>③강력한 정책금융 지원</strong>이라는 3대 순풍이 결합된 다년간의 구조적 성장 사이클의 변곡점에 서 있습니다. 글로벌 동종 기업 대비 현저한 밸류에이션 할인은 장기 투자자에게 매력적인 진입 기회를 제공합니다.</p>
+                </section>
+
+                <!-- 섹션 2: 글로벌 수요 -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" /></svg>
+                        섹션 2: 새로운 철의 장막: 글로벌 수요 슈퍼사이클
+                    </h2>
+                    <h3>2.1. 유럽의 재무장: GDP 2%는 바닥, 새로운 군비 경쟁의 서막</h3>
+                    <p>2022년 이후 NATO의 GDP 2% 국방비 지출은 의무적인 '최소선(floor)'으로 전환되었으며, 주요국들은 3~5% 지출을 요구하며 새로운 군비 경쟁을 촉발하고 있습니다. 폴란드는 GDP 5%를 목표로 유럽 재무장을 선도하는 '앵커 클라이언트' 역할을 하고 있으며, 루마니아 등 최전선 국가들도 군 현대화에 박차를 가하고 있습니다. 이러한 배경 속에서 K-방산은 유럽 경쟁사들이 따라올 수 없는 '신속한 납기'라는 <strong>가용성 프리미엄(availability premium)</strong>과 NATO 회원국 간 'K9 유저 클럽' 형성을 통한 강력한 <strong>네트워크 효과</strong>로 지속 가능한 경쟁 우위를 확보하고 있습니다.</p>
+                    <div class="chart-container">
+                        <h4 class="text-center mb-4">주요국 국방 예산 전망 (% of GDP)</h4>
+                        <canvas id="defenseBudgetChart"></canvas>
+                    </div>
+                </section>
+                
+                <!-- 섹션 3: 경쟁력 분석 -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m9 12.75 3 3m0 0 3-3m-3 3v-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                        섹션 3: K-방산의 경쟁력: 이행 능력과 공급망
+                    </h2>
+                    <h3>3.1. 성장의 리스크 제거: 한국수출입은행의 금융 지원</h3>
+                    <p>2024년 2월, 수출입은행의 법정자본금 한도를 15조원에서 25조원으로 증액하는 법 개정안 통과로 폴란드 대규모 계약의 금융 병목이 해소되었습니다. 이는 단순한 금융 지원 확대를 넘어, K-방산 수출에 대한 정부의 강력한 지원 의지를 전 세계에 보여준 조치이며, 향후 대규모 계약 파이프라인 전체의 리스크를 줄여주는 효과를 가집니다.</p>
+                    <h3>3.2. 생산능력(CAPA) 및 공급망 건전성</h3>
+                    <p>K-방산 기업들은 전례 없는 수출 수요에 대응하기 위해 생산 능력을 적극적으로 증설하고 있습니다. 특히 기술 이전 및 현지 생산은 초기 이익률 하락 우려와 달리, 장기적으로 기술료, 로열티, MRO 서비스 등 고마진의 안정적인 수익을 창출하는 '면도기와 면도날' 모델로의 전환을 의미합니다. 이는 단순 제조업체에서 장기 서비스 제공업체로의 재평가, 즉 <strong>주가 리레이팅(re-rating)</strong>으로 이어질 잠재력을 가집니다.</p>
+                </section>
+
+                <!-- 섹션 4: 기업별 분석 -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h12M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-1.5m-6 0h1.5m-1.5 0h-1.5m0 0h-1.5m0 0h-1.5m1.5 0v-2.25" /></svg>
+                        섹션 4: 기업별 심층 분석 및 밸류에이션
+                    </h2>
+                    <div id="company-analysis-section" class="space-y-6"></div>
+                    <div class="chart-container">
+                        <h4 class="text-center mb-4">글로벌 피어 대비 밸류에이션 (2026E P/E)</h4>
+                        <canvas id="valuationChart"></canvas>
+                    </div>
+                    <div id="revenue-table-container"></div>
+                </section>
+                
+                <!-- 섹션 5: 모델 포트폴리오 -->
+                <section>
+                    <h2>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 1 0 7.5 7.5h-7.5V6Z" /><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 10.5H21A7.5 7.5 0 0 0 13.5 3v7.5Z" /></svg>
+                        섹션 5: 규율에 입각한 접근: K-방산 모델 포트폴리오
+                    </h2>
+                    <h3>5.1. 포트폴리오 구성 및 배분</h3>
+                    <p>단기 조정으로 인한 저평가 매력과 중장기 성장성을 종합적으로 고려하여, 다음과 같은 모델 포트폴리오를 제안합니다.</p>
+                    <div class="chart-container my-8">
+                        <h4 class="text-center mb-4">모델 포트폴리오 추천 비중</h4>
+                        <div style="position: relative; height:280px; width:100%;">
+                            <canvas id="portfolioChart"></canvas>
+                        </div>
+                    </div>
+                    <div id="portfolio-cards-container" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Portfolio cards will be injected here by JS -->
+                    </div>
+
+                    <h3>5.2. 분기별 리밸런싱 프레임워크: 펀더멘털 기반 접근법</h3>
+                    <p>본 프레임워크는 단기적인 주가 변동이 아닌, 펀더멘털에 기반한 선제적이고 규율 있는 대응을 목표로 합니다. 포트폴리오 검토는 각 기업의 분기 실적 발표(금융감독원 DART 시스템을 통해 확인 가능)에 맞춰 분기별로 수행합니다.</p>
+                    <div class="space-y-4 mt-6">
+                        <div class="info-box">
+                            <h4>거시 및 수요 트리거 (포트폴리오 전반의 비중 확대 검토)</h4>
+                            <ul class="list-disc list-inside">
+                                <li><strong>신규 계약 수주:</strong> 포트폴리오 내 기업이 20억 달러 이상의 신규 실행계약을 체결할 경우.</li>
+                                <li><strong>예산 상향:</strong> 폴란드, 독일 등 주요 고객국이 공식적으로 국방비/GDP 목표를 현재 전망치 이상으로 상향 조정할 경우.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h4>기업별 이행 트리거 (종목 간 비중 조절 검토)</h4>
+                            <ul class="list-disc list-inside">
+                                <li><strong>이익률 편차:</strong> 2분기 연속으로 당사 추정 영업이익률 대비 +/- 200bp 이상의 지속적인 편차 발생 시. 이는 예상보다 뛰어난 실행 능력 또는 예상치 못한 비용 압박을 시사합니다.</li>
+                                <li><strong>납기 준수:</strong> 폴란드 K2/K9 등 핵심 계약의 납품 일정이 6개월 이상 지연되거나 앞당겨질 경우.</li>
+                                <li><strong>현금흐름 전환율:</strong> 순이익 대비 잉여현금흐름(FCF) 전환율이 현저히 저조할 경우. 이는 매출채권이나 재고 관리의 문제를 나타낼 수 있습니다.</li>
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <h4>밸류에이션 트리거 (차익 실현 또는 비중 확대 검토)</h4>
+                            <ul class="list-disc list-inside">
+                                <li><strong>피어 갭 축소:</strong> 특정 기업의 2026년 예상 P/E 배수가 직접적인 유럽 경쟁사 평균 대비 10% 이내로 근접할 경우, 비중 축소를 고려합니다.</li>
+                                <li><strong>피어 갭 확대:</strong> 펀더멘털의 부정적 변화 없이 밸류에이션 격차가 30% 이상 확대될 경우, 비중 확대를 고려합니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <h3>5.3. 리스크 매트릭스 및 거시경제 민감도</h3>
+                    <ul class="list-disc list-inside">
+                        <li><strong>지정학적 리스크:</strong> 우크라이나 사태의 안정적 해결 등 글로벌 긴장 완화가 재무장 속도를 늦추는 것이 가장 큰 리스크입니다.</li>
+                        <li><strong>이행 리스크:</strong> 대규모 복합 계약의 생산 지연, 비용 초과, 성능 미달 등의 리스크가 존재합니다.</li>
+                        <li><strong>재무 리스크:</strong> 고객국의 과도한 현지화 요구에 따른 마진 압박, 기본계약이 실행계약으로 전환되기 전 취소될 리스크가 있습니다.</li>
+                        <li><strong>거시경제 리스크:</strong> 원화 강세는 외화 매출의 원화 환산 가치를 감소시켜 실적에 부정적이며, 구리, 알루미늄 등 주요 원자재 가격 상승은 헤지나 판가 전가가 이뤄지지 않을 경우 이익률에 부담으로 작용할 수 있습니다.</li>
+                    </ul>
+                </section>
+            </article>
+        </div>
+    </div>
+
+    <script>
+        // Data
+        const portfolioData = [
+            { name: "한화에어로스페이스", ticker: "012450 KS", weight: "30%", price: "858,000원", target: "1,360,000원", upside: "58.5%", reason: "다각화된 포트폴리오와 압도적 수주잔고 보유. 섹터 내 최선호주." },
+            { name: "현대로템", ticker: "064350 KS", weight: "25%", price: "180,400원", target: "330,000원", upside: "82.9%", reason: "폴란드 K2 수출 모멘텀. 유럽 재무장의 핵심 수혜주." },
+            { name: "LIG넥스원", ticker: "079550 KS", weight: "20%", price: "498,000원", target: "740,000원", upside: "48.6%", reason: "중동 중심의 고마진 정밀유도무기 수출로 장기 성장성 확보." },
+            { name: "풍산", ticker: "103140 KS", weight: "15%", price: "120,400원", target: "228,500원", upside: "89.8%", reason: "글로벌 탄약 부족 사태의 직접적이고 구조적인 수혜를 받는 순수 플레이어." },
+            { name: "한국항공우주(KAI)", ticker: "047810 KS", weight: "10%", price: "90,200원", target: "135,000원", upside: "49.7%", reason: "FA-50의 안정적 수출과 KF-21의 장기 성장 잠재력 보유." }
+        ];
+
+        // Chart Generation
+        function renderCharts() {
+            Chart.register(ChartDataLabels);
+
+            // New Portfolio Chart (Horizontal Bar)
+            new Chart(document.getElementById('portfolioChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: portfolioData.map(p => p.name),
+                    datasets: [{
+                        label: '추천 비중',
+                        data: portfolioData.map(p => parseFloat(p.weight)),
+                        backgroundColor: [
+                            'rgba(37, 99, 235, 0.8)',
+                            'rgba(22, 163, 74, 0.8)',
+                            'rgba(217, 119, 6, 0.8)',
+                            'rgba(220, 38, 38, 0.8)',
+                            'rgba(75, 85, 99, 0.8)'
+                        ],
+                        borderColor: [
+                            'rgb(37, 99, 235)',
+                            'rgb(22, 163, 74)',
+                            'rgb(217, 119, 6)',
+                            'rgb(220, 38, 38)',
+                            'rgb(75, 85, 99)'
+                        ],
+                        borderWidth: 1,
+                        barThickness: 30,
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return value + '%'
+                                },
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false,
+                                drawBorder: false,
+                            },
+                            ticks: {
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        datalabels: {
+                            anchor: 'end',
+                            align: 'end',
+                            formatter: (value) => value + '%',
+                            font: {
+                                weight: 'bold',
+                                size: 14,
+                            },
+                            color: '#374151'
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('valuationChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['한화에어로', '현대로템', 'KAI', 'LIG넥스원'],
+                    datasets: [{
+                        label: 'K-방산 (2026E P/E)',
+                        data: [19.2, 21.3, 24.5, 22.0],
+                        backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    }, {
+                        label: '글로벌 피어 평균 (2026E P/E)',
+                        data: [22.5, 25.0, 18.5, 25.5],
+                        backgroundColor: 'rgba(107, 114, 128, 0.8)',
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } }, responsive: true, plugins: { legend: { position: 'top' } } }
+            });
+            new Chart(document.getElementById('defenseBudgetChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['폴란드', '루마니아', '독일', '영국'],
+                    datasets: [{
+                        label: '2024년 (% of GDP)',
+                        data: [4.12, 2.2, 2.02, 2.3],
+                        backgroundColor: 'rgba(107, 114, 128, 0.7)',
+                    }, {
+                        label: '2025-27E 목표 (% of GDP)',
+                        data: [5.0, 3.0, 2.4, 2.5],
+                        backgroundColor: 'rgba(37, 99, 235, 0.9)',
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: { y: { beginAtZero: true, ticks: { callback: (v) => v + '%' } } },
+                    plugins: { legend: { position: 'top' } }
+                }
+            });
+        }
+
+        function generateTable(title, headers, rows) {
+            let tableHtml = `<h4 class="mt-6 mb-2">${title}</h4><div class="overflow-x-auto"><table class="min-w-full divide-y divide-gray-200">`;
+            tableHtml += `<thead class="bg-gray-50"><tr>`;
+            headers.forEach(header => {
+                tableHtml += `<th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">${header}</th>`;
+            });
+            tableHtml += `</tr></thead><tbody class="bg-white divide-y divide-gray-200">`;
+            rows.forEach(row => {
+                tableHtml += `<tr>`;
+                row.forEach(cell => {
+                    tableHtml += `<td class="px-4 py-2 whitespace-nowrap">${cell}</td>`;
+                });
+                tableHtml += `</tr>`;
+            });
+            tableHtml += `</tbody></table></div>`;
+            return tableHtml;
+        }
+        
+        function generateFullCompanyAnalysis() {
+            const companies = [
+                 { name: "한화에어로스페이스 (012450 KS)", targetPrice: "1,360,000원", content: `<strong>기업 프로필 및 전략적 포지셔닝:</strong> K9 자주포, 천무 등 지상방산 시스템, 항공기 엔진, 해양 방산까지 아우르는 대한민국 대표 종합 방산 기업. 폴란드, 루마니아, 호주, 이집트 등 광범위한 수출 포트폴리오가 강점.<br><strong>수익성 및 밸류에이션:</strong> 2026년 예상 EPS 기준 PER은 약 19.2배로, 유럽 피어 평균인 33.5배 대비 현저히 낮은 수준. 다각화된 사업 포트폴리오와 압도적인 수주잔고를 고려할 때, 섹터 내 최선호주(Top Pick)로서 매력적인 진입 구간.` },
+                { name: "현대로템 (064350 KS)", targetPrice: "330,000원", content: `<strong>기업 프로필 및 전략적 포지셔닝:</strong> K2 전차를 중심으로 한 기갑 전투체계 전문기업. 폴란드와의 초대형 K2 수출 계약으로 폭발적인 성장 국면에 진입.<br><strong>수익성 및 밸류에이션:</strong> 2025년 2분기 실적은 매출 1.42조 원, 순이익 1,906억 원으로 전년 동기 대비 각각 30%, 88% 급증하며 성장세 현실화. 유럽 재무장의 최대 수혜주 중 하나로, 글로벌 피어 그룹 대비 상당한 밸류에이션 할인.` },
+                { name: "한국항공우주산업 (KAI, 047810 KS)", targetPrice: "135,000원", content: `<strong>기업 프로필 및 전략적 포지셔닝:</strong> 대한민국 유일의 고정익 항공기 원청업체. KF-21, FA-50 전투기 및 수리온 헬리콥터 등 영위.<br><strong>수익성 및 밸류에이션:</strong> 단기적으로 FA-50 수출이 실적 견인. 핵심 장기 성장 동력은 KF-21 전투기. 2026년 KF-21 초도 양산 시작 시 본격적인 성장 기대. 미래 가치 대비 저평가.` },
+                { name: "LIG넥스원 (079550 KS)", targetPrice: "740,000원", content: `<strong>기업 프로필 및 전략적 포지셔닝:</strong> 천궁-II 등 정밀유도무기, 감시정찰, 지휘통제통신 분야에 특화된 방산전자 전문 기업.<br><strong>수익성 및 밸류에이션:</strong> UAE, 사우디와의 천궁-II 계약으로 5년 이상의 안정적, 고수익성 매출 확보. 2025년 전사 영업이익률 8.2%까지 상승 전망. 중동 지역 독보적 입지.` },
+                { name: "풍산 (103140 KS)", targetPrice: "228,500원", content: `<strong>기업 프로필 및 전략적 포지셔닝:</strong> 구리 신동사업과 각종 탄약을 생산하는 방산사업 영위. 글로벌 탄약 부족 현상의 직접적인 수혜주.<br><strong>수익성 및 밸류에이션:</strong> 2025년 방산 부문 매출 1.26조 원 계획. 글로벌 탄약 가격 상승과 수요 강세 지속으로 중장기적 수익성 전망 매우 밝음. 구조적 테마의 최대 수혜주.` }
+            ];
+            let html = '';
+            companies.forEach(c => {
+                html += `
+                <div class="mt-6 p-4 border-l-4 border-blue-600 bg-gray-50 rounded-r-lg">
+                    <h4 class="text-xl font-bold text-gray-900">${c.name}</h4>
+                    <div class="text-sm mt-2 space-y-2">${c.content}</div>
+                    <p class="mt-3"><strong>매수(Buy) 의견, 12개월 목표주가:</strong> <span class="font-bold text-xl text-blue-700">${c.targetPrice}</span></p>
+                </div>
+                `;
+            });
+            document.getElementById('company-analysis-section').innerHTML = html;
+        }
+
+        function populatePortfolioCards() {
+            const container = document.getElementById('portfolio-cards-container');
+            let html = '';
+            portfolioData.forEach(p => {
+                html += `
+                <div class="portfolio-card flex flex-col">
+                    <div class="flex-grow">
+                        <div class="flex justify-between items-start">
+                            <h4 class="text-lg font-bold text-blue-800">${p.name}</h4>
+                            <span class="text-lg font-bold text-blue-800">${p.weight}</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mb-3">${p.ticker}</p>
+                        <p class="text-gray-700 text-sm">${p.reason}</p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-200 text-sm">
+                        <div class="flex justify-between">
+                            <span>현재가:</span>
+                            <span class="font-semibold">${p.price}</span>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <span>목표주가:</span>
+                            <span class="font-semibold text-blue-600">${p.target}</span>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <span>상승 여력:</span>
+                            <span class="font-semibold text-green-600">${p.upside}</span>
+                        </div>
+                    </div>
+                </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+        
+        function populateTables() {
+            const revenueTable = generateTable("Table 4.1: K-방산 주요 수출 계약 매출 인식 모델 (2025-2028E, 단위: 십억원)",
+                ["계약명", "계약사", "2025E", "2026E", "2027E", "2028E", "비고"],
+                [
+                    ["폴란드 K2 (2차, 직도입분)", "현대로템", "-", "1,500", "1,500", "-", "2026-27년 116대 인도"],
+                    ["폴란드 K2 (2차, 현지생산분)", "현대로템", "-", "-", "500", "1,500", "2028-30년 64대 인도"],
+                    ["폴란드 K9 (2차)", "한화에어로스페이스", "500", "1,500", "1,450", "-", "2026-27년 152문 인도"],
+                    ["루마니아 K9", "한화에어로스페이스", "-", "-", "600", "700", "2027년부터 인도 시작"],
+                    ["사우디 천궁-II", "LIG넥스원", "200", "900", "1,500", "1,000", "5년 이상 장기 계약"],
+                    ["말레이시아 FA-50", "KAI", "-", "650", "650", "-", "2026년부터 인도 시작"],
+                    ["KF-21 (초도 양산)", "KAI", "-", "-", "1,000", "1,500", "2026년 3분기부터 납품 예상"]
+                ]
+            );
+            document.getElementById('revenue-table-container').innerHTML = revenueTable;
+        }
+
+        // Initial Render
+        document.addEventListener('DOMContentLoaded', (event) => {
+            generateFullCompanyAnalysis();
+            populateTables();
+            populatePortfolioCards();
+            renderCharts();
+        });
+    </script>
+</body>
+</html>

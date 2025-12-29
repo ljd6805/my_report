@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Driven TDD 세미나</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .slide {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #4f46e5, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-white flex flex-col items-center justify-center h-screen overflow-hidden">
+
+    <!-- Slide Container -->
+    <div id="presentation" class="w-full h-full max-w-6xl max-h-[720px] bg-slate-800 rounded-2xl shadow-2xl flex flex-col relative p-4">
+        <main class="flex-grow flex items-center justify-center">
+            <!-- Slides will be injected here by JS -->
+        </main>
+        
+        <!-- Navigation -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center space-x-4 z-10">
+            <button id="prevBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white rounded-full p-3 shadow-lg transition-transform transform hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+            </button>
+            <div id="slideCounter" class="text-slate-400 text-lg font-medium"></div>
+            <button id="nextBtn" class="bg-indigo-600 hover:bg-indigo-500 text-white rounded-full p-3 shadow-lg transition-transform transform hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const slides = [
+            // Slide 1: Title
+            `
+            <div class="slide flex-col items-center justify-center text-center p-8">
+                <h1 class="text-6xl md:text-7xl font-black mb-4 leading-tight">
+                    <span class="gradient-text">AI-Driven TDD</span>
+                </h1>
+                <p class="text-2xl md:text-3xl text-slate-300 mb-8">테스트 주도 개발과 AI 코딩의 시너지를 통한 개발 혁신</p>
+                <div class="w-24 h-1 bg-indigo-500 rounded-full"></div>
+                <p class="mt-8 text-xl text-slate-400">[팀명/발표자 이름]</p>
+            </div>
+            `,
+            // Slide 2: Introduction - The Two Paradigms
+            `
+            <div class="slide w-full flex-col justify-center p-12">
+                <h2 class="text-4xl font-bold mb-8 text-indigo-400">서론: 두 개발 패러다임의 만남</h2>
+                <div class="grid md:grid-cols-2 gap-8 text-lg">
+                    <div class="bg-slate-700/50 p-6 rounded-lg border border-slate-600">
+                        <h3 class="text-2xl font-bold mb-3 text-pink-400">테스트 주도 개발 (TDD)</h3>
+                        <p class="text-slate-300">견고한 설계와 버그 예방을 위한 검증된 방법론.</p>
+                        <p class="mt-4 text-slate-400"><strong class="text-red-400">단점:</strong> 초기 학습 곡선, 개발 속도 저하에 대한 우려.</p>
+                    </div>
+                    <div class="bg-slate-700/50 p-6 rounded-lg border border-slate-600">
+                        <h3 class="text-2xl font-bold mb-3 text-cyan-400">AI 코딩 어시스턴트</h3>
+                        <p class="text-slate-300">놀라운 속도의 코드 생성을 통한 생산성 혁신.</p>
+                        <p class="mt-4 text-slate-400"><strong class="text-red-400">단점:</strong> 코드의 정확성, 안정성, 일관성 보장 불가.</p>
+                    </div>
+                </div>
+                <p class="mt-12 text-center text-2xl font-semibold">이 둘은 상충하는 것이 아니라, <span class="gradient-text font-bold">완벽한 상호보완 관계</span>입니다.</p>
+            </div>
+            `,
+            // Slide 3: The Core Idea
+            `
+            <div class="slide w-full flex-col justify-center p-12">
+                <h2 class="text-4xl font-bold mb-2 text-center">핵심 아이디어</h2>
+                <p class="text-5xl font-black mb-10 text-center gradient-text">테스트 케이스는 가장 완벽한 프롬프트다</p>
+                <div class="bg-slate-900/70 p-6 rounded-lg shadow-inner">
+                    <h3 class="text-xl font-bold mb-4 text-slate-300">"사용자 이메일 검증 함수" 라는 모호한 프롬프트 대신...</h3>
+                    <pre class="bg-slate-800 p-4 rounded-md overflow-x-auto text-sm"><code class="language-javascript">
+describe('validateEmail', () => {
+  test('유효한 이메일 주소를 통과시켜야 한다', () => {
+    expect(validateEmail('test@example.com')).toBe(true);
+  });
+
+  test('골뱅이(@)가 없으면 실패해야 한다', () => {
+    expect(validateEmail('testexample.com')).toBe(false);
+  });
+
+  test('도메인이 없으면 실패해야 한다', () => {
+    expect(validateEmail('test@')).toBe(false);
+  });
+});
+                    </code></pre>
+                    <p class="mt-6 text-xl text-center font-semibold text-indigo-300">AI에게 '무엇을' 만들어야 하는지 명확하게 지시하는 <strong class="text-white">실행 가능한 명세 (Executable Specification)</strong>가 됩니다.</p>
+                </div>
+            </div>
+            `,
+            // Slide 4: The Workflow
+            `
+            <div class="slide w-full flex-col justify-center p-12">
+                <h2 class="text-4xl font-bold mb-10 text-center">테스트 주도 AI 개발 (TDAD) 워크플로우</h2>
+                <div class="flex flex-col md:flex-row justify-around items-center gap-4">
+                    <div class="text-center p-6 rounded-lg bg-red-500/20 border border-red-500 w-full md:w-1/3">
+                        <h3 class="text-3xl font-bold text-red-400 mb-2">RED</h3>
+                        <p class="text-xl font-semibold mb-2">인간의 통찰력으로 '질문' 설계</p>
+                        <p class="text-slate-300">실패하는 단위 테스트(정교한 프롬프트)를 작성합니다.</p>
+                    </div>
+                    <div class="text-5xl font-thin text-slate-500 mx-4">&rarr;</div>
+                    <div class="text-center p-6 rounded-lg bg-green-500/20 border border-green-500 w-full md:w-1/3">
+                        <h3 class="text-3xl font-bold text-green-400 mb-2">GREEN</h3>
+                        <p class="text-xl font-semibold mb-2">AI의 속도로 '초안' 확보</p>
+                        <p class="text-slate-300">AI가 테스트를 통과하는 코드를 신속하게 생성합니다.</p>
+                    </div>
+                    <div class="text-5xl font-thin text-slate-500 mx-4">&rarr;</div>
+                    <div class="text-center p-6 rounded-lg bg-blue-500/20 border border-blue-500 w-full md:w-1/3">
+                        <h3 class="text-3xl font-bold text-blue-400 mb-2">REFACTOR</h3>
+                        <p class="text-xl font-semibold mb-2">인간의 전문성으로 '품질' 완성</p>
+                        <p class="text-slate-300">가독성, 유지보수성, 아키텍처 일관성을 개선합니다.</p>
+                    </div>
+                </div>
+            </div>
+            `,
+            // Slide 5: Comparison Table
+            `
+            <div class="slide w-full flex-col justify-center p-12">
+                <h2 class="text-4xl font-bold mb-6 text-center">방법론 비교: 왜 TDAD가 강력한가?</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-700">
+                                <th class="p-3 border border-slate-600">개발 방법론</th>
+                                <th class="p-3 border border-slate-600">초기 속도</th>
+                                <th class="p-3 border border-slate-600">코드 품질</th>
+                                <th class="p-3 border border-slate-600">결함 발생률</th>
+                                <th class="p-3 border border-slate-600">주요 위험</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-slate-300">
+                            <tr class="bg-slate-800/50">
+                                <td class="p-3 border border-slate-600 font-semibold">전통적 개발</td>
+                                <td class="p-3 border border-slate-600">빠름</td>
+                                <td class="p-3 border border-slate-600">낮음-중간</td>
+                                <td class="p-3 border border-slate-600 text-red-400">높음</td>
+                                <td class="p-3 border border-slate-600">후반부 대규모 수정</td>
+                            </tr>
+                            <tr class="bg-slate-800/50">
+                                <td class="p-3 border border-slate-600 font-semibold">순수 TDD (수동)</td>
+                                <td class="p-3 border border-slate-600">느림</td>
+                                <td class="p-3 border border-slate-600 text-green-400">매우 높음</td>
+                                <td class="p-3 border border-slate-600 text-green-400">매우 낮음</td>
+                                <td class="p-3 border border-slate-600">초기 생산성 저하</td>
+                            </tr>
+                            <tr class="bg-slate-800/50">
+                                <td class="p-3 border border-slate-600 font-semibold">AI 단독 생성</td>
+                                <td class="p-3 border border-slate-600">매우 빠름</td>
+                                <td class="p-3 border border-slate-600 text-red-400">매우 낮음</td>
+                                <td class="p-3 border border-slate-600 text-red-400">매우 높음</td>
+                                <td class="p-3 border border-slate-600">'그럴듯함의 부채'</td>
+                            </tr>
+                            <tr class="bg-indigo-600/30">
+                                <td class="p-3 border border-indigo-500 font-bold text-white">테스트 주도 AI 개발 (TDAD)</td>
+                                <td class="p-3 border border-indigo-500 text-white">중간-빠름</td>
+                                <td class="p-3 border border-indigo-500 text-green-300 font-bold">높음</td>
+                                <td class="p-3 border border-indigo-500 text-green-300 font-bold">낮음</td>
+                                <td class="p-3 border border-indigo-500 text-white">테스트 과적합</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            `,
+            // Slide 6: The New Role of the Developer
+            `
+            <div class="slide w-full flex-col justify-center items-center p-12 text-center">
+                <h2 class="text-4xl font-bold mb-8">개발자의 역할 변화</h2>
+                <div class="flex items-center justify-center gap-8">
+                    <div class="text-center">
+                        <p class="text-2xl text-slate-400 line-through">코드 작성자</p>
+                        <p class="text-2xl text-slate-400 line-through">단순 구현가</p>
+                    </div>
+                    <div class="text-6xl font-thin text-indigo-400">&rArr;</div>
+                    <div class="text-center">
+                        <p class="text-4xl font-bold gradient-text">시스템 아키텍트</p>
+                        <p class="text-4xl font-bold gradient-text">품질 관리자</p>
+                    </div>
+                </div>
+                <div class="mt-12 bg-slate-700/50 p-6 rounded-lg max-w-3xl">
+                    <p class="text-2xl text-slate-200">
+                        가치는 <strong class="text-white">타이핑 속도</strong>가 아닌, <strong class="text-white">비판적 평가</strong>, <strong class="text-white">아키텍처적 추론</strong>, 그리고 <strong class="text-white">전략적 리팩토링</strong> 능력으로 결정됩니다.
+                    </p>
+                </div>
+            </div>
+            `,
+             // Slide 7: Risks & Mitigation
+            `
+            <div class="slide w-full flex-col justify-center p-12">
+                <h2 class="text-4xl font-bold mb-8">함정 탐색: 주요 리스크 및 완화 방안</h2>
+                <div class="space-y-6 text-lg">
+                    <div class="bg-slate-700/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-red-400 mb-2">위험 1: 테스트에 대한 과적합 (Overfitting)</h3>
+                        <p class="text-slate-300">AI가 특정 테스트만 통과하는 취약한 코드를 생성할 수 있습니다.</p>
+                        <p class="mt-2 text-green-400"><strong class="font-semibold">완화 방안:</strong> 다양한 엣지 케이스를 포함하는 포괄적인 테스트 스위트를 구축합니다.</p>
+                    </div>
+                    <div class="bg-slate-700/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-red-400 mb-2">위험 2: 개발자 역량 저하 (Deskilling)</h3>
+                        <p class="text-slate-300">AI에 과도하게 의존하여 개발자의 문제 해결 능력이 저하될 수 있습니다.</p>
+                        <p class="mt-2 text-green-400"><strong class="font-semibold">완화 방안:</strong> Refactor 단계의 중요성을 강조하고, AI 코드에 대한 비판적 분석 문화를 구축합니다.</p>
+                    </div>
+                    <div class="bg-slate-700/50 p-6 rounded-lg">
+                        <h3 class="text-xl font-bold text-red-400 mb-2">위험 3: 비결정론적 블랙박스</h3>
+                        <p class="text-slate-300">AI의 예측 불가능성으로 인해 디버깅이 복잡해지고 책임 소재가 불분명해집니다.</p>
+                        <p class="mt-2 text-green-400"><strong class="font-semibold">완화 방안:</strong> 중요한 시스템에서는 엄격한 코드 리뷰와 최종 책임은 인간에게 있음을 명확히 합니다.</p>
+                    </div>
+                </div>
+            </div>
+            `,
+            // Slide 8: Conclusion
+            `
+            <div class="slide flex-col items-center justify-center text-center p-12">
+                <h2 class="text-5xl font-black mb-8 gradient-text">결론: 인간과 AI의 협업, 그 이상을 향하여</h2>
+                <p class="text-2xl text-slate-300 max-w-4xl leading-relaxed">
+                    TDAD는 단순히 TDD에 AI를 끼워 넣는 것이 아닙니다.
+                    <br/>
+                    이는 <strong class="text-white">개발자의 역할을 재정의</strong>하고, 인간의 통찰력과 AI의 속도를 결합하여 소프트웨어 개발의 생산성과 품질을 한 차원 높이는 <strong class="text-white">차세대 개발 전략</strong>입니다.
+                </p>
+                <div class="w-24 h-1 bg-indigo-500 rounded-full my-10"></div>
+                <p class="text-2xl font-semibold text-slate-200">
+                    우리는 AI를 가장 효과적으로 활용하여 더 높은 가치를 창출해야 합니다.
+                </p>
+            </div>
+            `,
+            // Slide 9: Q&A
+            `
+            <div class="slide flex-col items-center justify-center text-center p-8">
+                <h1 class="text-8xl font-black gradient-text">Q & A</h1>
+                <p class="mt-8 text-2xl text-slate-400">Thank You</p>
+            </div>
+            `
+        ];
+
+        let currentSlide = 0;
+        const presentationContainer = document.querySelector('#presentation main');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slideCounter = document.getElementById('slideCounter');
+
+        function init() {
+            presentationContainer.innerHTML = slides.join('');
+            showSlide(0);
+        }
+
+        function showSlide(index) {
+            const slideElements = document.querySelectorAll('.slide');
+            if (index >= slideElements.length || index < 0) {
+                return;
+            }
+
+            slideElements.forEach((slide, i) => {
+                if (i === index) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            
+            currentSlide = index;
+            updateControls();
+        }
+
+        function updateControls() {
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+            slideCounter.textContent = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                showSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        // Initialize the presentation
+        init();
+    </script>
+</body>
+</html>

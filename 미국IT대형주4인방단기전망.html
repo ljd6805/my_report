@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미국 IT 대형주 4인방 단기 전망 리포트</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f2f5;
+        }
+        .card {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .chart-container {
+            position: relative;
+            height: 350px;
+            width: 100%;
+        }
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        .highlight {
+            color: #1d4ed8;
+            font-weight: 700;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- 헤더 -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">미국 IT 대형주 4인방 단기 전망</h1>
+            <p class="text-lg text-gray-600 mt-4">META, Palantir, Amazon, Microsoft 심층 분석 (2025년 3분기 기준)</p>
+        </header>
+
+        <!-- 거시경제 배경 -->
+        <section id="macro-economy" class="mb-16">
+            <h2 class="text-3xl font-bold border-b-4 border-blue-600 pb-2 mb-6">거시경제 배경</h2>
+            <div class="card">
+                <p class="mb-4 text-lg">연방준비제도(Fed)는 2025년 7월 FOMC 회의에서 정책금리를 <span class="highlight">4.25~4.50%</span>로 동결하며 신중한 입장을 유지하고 있습니다. 인플레이션과 미·중 관세 불확실성이 금리 인하를 지연시키고 있으나, 2025년 하반기 인플레이션 둔화 기대감은 기술주에 긍정적일 수 있습니다.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 text-center">
+                    <div class="p-4 bg-blue-50 rounded-lg">
+                        <div class="text-gray-500 text-sm">정책금리 (2025년 7월)</div>
+                        <div class="text-3xl font-bold text-blue-700">4.25 ~ 4.50%</div>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg">
+                        <div class="text-gray-500 text-sm">미국 실업률</div>
+                        <div class="text-3xl font-bold text-green-700">4%대</div>
+                        <div class="text-xs text-gray-500">노동시장 점진적 둔화 조짐</div>
+                    </div>
+                </div>
+                <p class="mt-6 text-gray-700">전반적으로 거시경제는 실질 GDP의 완만한 성장과 인플레이션 안정화 추세로 접어들며, 중앙은행 정책에 대한 경계심과 기대감이 교차하는 상황입니다. 고금리 환경은 성장주에 부담을 주지만, 빅테크의 견고한 실적 성장성에 투자자들의 관심이 집중되고 있습니다.</p>
+            </div>
+        </section>
+
+        <!-- 기업별 분석 -->
+        <section id="company-analysis">
+            <h2 class="text-3xl font-bold border-b-4 border-blue-600 pb-2 mb-6">기업별 심층 분석</h2>
+            <div class="space-y-12">
+
+                <!-- Meta Platforms -->
+                <article id="meta" class="card">
+                    <div class="flex flex-wrap items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-blue-800">Meta Platforms (META)</h3>
+                        <span class="tag bg-blue-100 text-blue-800">광고 AI 선도</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">2025년 2분기 실적 하이라이트</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>매출:</strong> $475.2억 (전년 대비 +22%)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>EPS:</strong> $7.14 (전년 대비 +38%, 예상치 20% 상회)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>주가 (실적발표 후):</strong> 시간외 +11~12% 급등</li>
+                            </ul>
+                            <p class="mt-4 text-gray-700">AI 기반 광고 타겟팅 개선이 10분기 연속 어닝 서프라이즈를 견인했습니다. 비용 효율화와 함께 영업이익률이 개선되며 사상 최고가를 경신했습니다.</p>
+                            <h4 class="text-xl font-semibold mt-6 mb-3">AI 전략 및 성장성</h4>
+                            <p class="text-gray-700">AI 추천 알고리즘으로 광고 효율을 극대화하고 있으며, 거대 언어모델 'Llama' 시리즈와 '초개인화 AI' 비전을 통해 차세대 플랫폼 경쟁력을 강화하고 있습니다. 메타버스와 AI를 접목한 Reality Labs 부문도 성장세를 보입니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-center">기술적 분석: 주가 추세</h4>
+                            <div class="chart-container"><canvas id="metaChart"></canvas></div>
+                            <p class="text-sm text-center text-gray-500 mt-2">단기 저항선 $780~800, 1차 지지선 $740</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Palantir Technologies -->
+                <article id="palantir" class="card">
+                    <div class="flex flex-wrap items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-purple-800">Palantir Technologies (PLTR)</h3>
+                        <span class="tag bg-purple-100 text-purple-800">기업/정부용 AI 플랫폼 리더</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">2025년 2분기 실적 하이라이트</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>매출:</strong> $10.0억 (전년 대비 +48%, 창사 첫 분기 $10억 돌파)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>영업이익률:</strong> 27% 달성</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>상업 부문 매출(미국):</strong> 93% 폭증</li>
+                            </ul>
+                            <p class="mt-4 text-gray-700">기업용 AI 플랫폼(AIP) 수요 폭증에 힘입어 가이던스를 상향 조정했으며, S&P 500 최고 상승률을 기록 중입니다. 다만, 12개월 선행 PER 200배 이상의 높은 밸류에이션은 부담입니다.</p>
+                             <h4 class="text-xl font-semibold mt-6 mb-3">AI 전략 및 경쟁력</h4>
+                             <p class="text-gray-700">경쟁사와 달리 AI 모델의 '실제 현장 배치(deployment)'에 강점을 둔 AIP 플랫폼으로 차별화에 성공했습니다. 짧은 교육만으로 고객이 AI를 즉시 활용하게 하는 실용성 덕분에 정부 및 민간 계약이 급증하고 있습니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-center">주요 기술주 1년 주가 상승률 비교</h4>
+                            <div class="chart-container"><canvas id="palantirChart"></canvas></div>
+                            <p class="text-sm text-center text-gray-500 mt-2">Palantir의 압도적인 주가 퍼포먼스</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Amazon.com -->
+                <article id="amazon" class="card">
+                    <div class="flex flex-wrap items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-orange-600">Amazon.com (AMZN)</h3>
+                        <span class="tag bg-orange-100 text-orange-800">AI 인프라 공급자</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3">2025년 2분기 실적 하이라이트</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>매출:</strong> $1,677억 (전년 대비 +13%)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>순이익:</strong> $182억 (전년 대비 +35%)</li>
+                                <li class="flex items-center"><span class="text-blue-500 mr-2">▶</span><strong>AWS 매출 성장률:</strong> +17.5%</li>
+                            </ul>
+                            <p class="mt-4 text-gray-700">이커머스와 클라우드(AWS) 모두 견조한 성장을 보였으나, 대규모 AI 투자 비용 증가 우려로 주가는 단기 조정을 겪었습니다.</p>
+                            <h4 class="text-xl font-semibold mt-6 mb-3">AI 전략 및 성장성</h4>
+                            <p class="text-gray-700">AI 수요 대응을 위해 연간 <span class="highlight">$378억</span>의 대규모 설비투자(CapEx)를 집행할 계획입니다. 자체 개발 AI 칩(Trainium)과 Bedrock 플랫폼을 통해 클라우드 1위 사업자 지위를 공고히 하고, 장기 성장 잠재력을 높이는 전략입니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-center">2분기 사업 부문별 매출 비중</h4>
+                            <div class="chart-container"><canvas id="amazonChart"></canvas></div>
+                            <p class="text-sm text-center text-gray-500 mt-2">AWS가 핵심 성장 동력 역할을 지속</p>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Microsoft -->
+                <article id="microsoft" class="card">
+                    <div class="flex flex-wrap items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-green-700">Microsoft (MSFT)</h3>
+                        <span class="tag bg-green-100 text-green-800">AI 응용 전범위 주도</span>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                           <h4 class="text-xl font-semibold mb-3">2025년 4분기(FY) 실적 하이라이트</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>매출:</strong> $764억 (전년 대비 +18%)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>EPS:</strong> $3.65 (전년 대비 +24%)</li>
+                                <li class="flex items-center"><span class="text-green-500 mr-2">▲</span><strong>Azure 및 클라우드 성장률:</strong> +39% (예상 상회)</li>
+                            </ul>
+                            <p class="mt-4 text-gray-700">OpenAI 파트너십을 통한 AI 수요 선점 효과로 Azure가 경이적인 성장을 기록하며 사상 최대 분기 실적을 달성했습니다.</p>
+                            <h4 class="text-xl font-semibold mt-6 mb-3">AI 전략 및 경쟁력</h4>
+                            <p class="text-gray-700">생성형 AI 분야에서 가장 앞선 기업으로 평가받습니다. MS 365 Copilot, Azure OpenAI 서비스 등 기술 스택 전반에 AI를 통합하여 모든 산업의 업무 혁신을 주도하고 있습니다. 구글, 메타를 능가하는 공격적인 투자로 AI 시대 패러다임을 이끌고 있습니다.</p>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-center">클라우드 부문 성장세</h4>
+                            <div class="chart-container"><canvas id="microsoftChart"></canvas></div>
+                            <p class="text-sm text-center text-gray-500 mt-2">AI 워크로드 급증으로 Azure가 폭발적 성장 견인</p>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- 종합 비교 및 투자 판단 -->
+        <section id="conclusion" class="mt-16">
+            <h2 class="text-3xl font-bold border-b-4 border-blue-600 pb-2 mb-6">종합 비교 및 투자 판단</h2>
+            <div class="card mb-8">
+                <h3 class="text-2xl font-bold text-center mb-6">주요 지표 비교</h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="p-3 font-semibold text-sm">항목</th>
+                                <th class="p-3 font-semibold text-sm text-center">Meta (META)</th>
+                                <th class="p-3 font-semibold text-sm text-center">Palantir (PLTR)</th>
+                                <th class="p-3 font-semibold text-sm text-center">Amazon (AMZN)</th>
+                                <th class="p-3 font-semibold text-sm text-center">Microsoft (MSFT)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">시가총액</td>
+                                <td class="p-3 text-center">약 $1.93조</td>
+                                <td class="p-3 text-center">약 $0.43조</td>
+                                <td class="p-3 text-center">약 $2.37조</td>
+                                <td class="p-3 text-center">약 $3.88조</td>
+                            </tr>
+                            <tr class="border-b bg-gray-50">
+                                <td class="p-3 font-medium">P/E (TTM)</td>
+                                <td class="p-3 text-center">27.6배</td>
+                                <td class="p-3 text-center text-red-600 font-bold">621배</td>
+                                <td class="p-3 text-center">34배</td>
+                                <td class="p-3 text-center">34배</td>
+                            </tr>
+                            <tr class="border-b">
+                                <td class="p-3 font-medium">최근 분기 매출 증가율</td>
+                                <td class="p-3 text-center text-green-600 font-bold">+22%</td>
+                                <td class="p-3 text-center text-green-700 font-extrabold">+48%</td>
+                                <td class="p-3 text-center text-green-600">+13%</td>
+                                <td class="p-3 text-center text-green-600">+18%</td>
+                            </tr>
+                             <tr class="border-b bg-gray-50">
+                                <td class="p-3 font-medium">주가 1년 변동</td>
+                                <td class="p-3 text-center text-green-600 font-bold">+54.6%</td>
+                                <td class="p-3 text-center text-green-700 font-extrabold">+523.9%</td>
+                                <td class="p-3 text-center text-green-600">+34.8%</td>
+                                <td class="p-3 text-center text-green-600">+29.7%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-center mb-6">단기 투자 매력도 점수 (10점 만점)</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-purple-700">Palantir</span>
+                                <span class="text-sm font-medium text-purple-700">9.0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4"><div class="bg-purple-600 h-4 rounded-full" style="width: 90%"></div></div>
+                            <p class="text-xs text-gray-500 mt-1">고위험 고수익: 폭발적 성장 모멘텀, 높은 변동성</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-blue-700">Meta</span>
+                                <span class="text-sm font-medium text-blue-700">8.0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4"><div class="bg-blue-600 h-4 rounded-full" style="width: 80%"></div></div>
+                            <p class="text-xs text-gray-500 mt-1">균형 잡힌 성장: 견고한 실적, 합리적 밸류에이션</p>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-green-700">Microsoft</span>
+                                <span class="text-sm font-medium text-green-700">7.0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4"><div class="bg-green-600 h-4 rounded-full" style="width: 70%"></div></div>
+                            <p class="text-xs text-gray-500 mt-1">안정적 우상향: AI 선도, 방어주 성격 겸비</p>
+                        </div>
+                         <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-orange-600">Amazon</span>
+                                <span class="text-sm font-medium text-orange-600">6.0</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-4"><div class="bg-orange-500 h-4 rounded-full" style="width: 60%"></div></div>
+                             <p class="text-xs text-gray-500 mt-1">장기적 관점: 단기 투자 부담, 조정 시 매수 기회</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                     <h3 class="text-2xl font-bold text-center mb-6">결론 및 투자 전략</h3>
+                     <p class="mb-4">4개사 모두 AI라는 구조적 성장 테마의 수혜를 받고 있으며, 향후 1분기 전망으로는 <span class="highlight">Palantir와 Meta</span>가 가장 큰 상승 여력을 지닌 것으로 보입니다.</p>
+                     <ul class="list-disc list-inside space-y-2 text-gray-700">
+                        <li><strong>Palantir (PLTR):</strong> 단기 업사이드 잠재력이 가장 크지만, 극심한 변동성과 밸류에이션 부담을 감안해야 합니다.</li>
+                        <li><strong>Meta (META):</strong> 성장성과 가치의 균형이 매력적이며, '저평가된 AI 수혜주'로 재평가될 가능성이 있습니다.</li>
+                        <li><strong>Microsoft (MSFT):</strong> 포트폴리오의 안정적인 축으로, 꾸준하고 점진적인 상승이 기대됩니다.</li>
+                        <li><strong>Amazon (AMZN):</strong> 단기 모멘텀은 약하지만, 대규모 투자 이후 장기적인 성과가 기대되므로 조정 시 분할 매수 전략이 유효합니다.</li>
+                     </ul>
+                     <p class="mt-6 font-semibold">투자자는 각 종목의 특성을 이해하고, 거시 경제 이벤트에 따른 조정 시 분할 매수 기회로 활용하는 전략이 바람직합니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-12 py-6 border-t">
+            <p class="text-sm text-gray-500">자료 출처: 회사 실적발표 자료, TradingView, Reuters 등. 본 리포트는 투자 참고 자료이며, 최종 투자 결정에 대한 책임은 투자자 본인에게 있습니다.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Chart.js 스크립트
+        document.addEventListener('DOMContentLoaded', function () {
+            // Meta Chart
+            const ctxMeta = document.getElementById('metaChart').getContext('2d');
+            new Chart(ctxMeta, {
+                type: 'line',
+                data: {
+                    labels: ['3월', '4월', '5월', '6월', '7월', '8월 초'],
+                    datasets: [{
+                        label: 'META 주가',
+                        data: [630, 680, 700, 740, 785, 760],
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: false } }
+                }
+            });
+
+            // Palantir Chart
+            const ctxPalantir = document.getElementById('palantirChart').getContext('2d');
+            new Chart(ctxPalantir, {
+                type: 'bar',
+                data: {
+                    labels: ['Palantir', 'Meta', 'Amazon', 'Microsoft'],
+                    datasets: [{
+                        label: '1년 주가 상승률 (%)',
+                        data: [523.9, 54.6, 34.8, 29.7],
+                        backgroundColor: [
+                            'rgba(168, 85, 247, 0.7)',
+                            'rgba(59, 130, 246, 0.7)',
+                            'rgba(249, 115, 22, 0.7)',
+                            'rgba(22, 163, 74, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(168, 85, 247, 1)',
+                            'rgba(59, 130, 246, 1)',
+                            'rgba(249, 115, 22, 1)',
+                            'rgba(22, 163, 74, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { beginAtZero: true } }
+                }
+            });
+
+            // Amazon Chart
+            const ctxAmazon = document.getElementById('amazonChart').getContext('2d');
+            new Chart(ctxAmazon, {
+                type: 'doughnut',
+                data: {
+                    labels: ['북미 이커머스', '해외 이커머스', 'AWS'],
+                    datasets: [{
+                        label: '매출 비중',
+                        data: [854, 514, 309], // 실제 매출액 기반 비율
+                        backgroundColor: [
+                            'rgba(249, 115, 22, 0.8)',
+                            'rgba(234, 88, 12, 0.6)',
+                            'rgba(255, 159, 64, 0.9)'
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += '$' + context.raw + '억';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Microsoft Chart
+            const ctxMicrosoft = document.getElementById('microsoftChart').getContext('2d');
+            new Chart(ctxMicrosoft, {
+                type: 'bar',
+                data: {
+                    labels: ['Azure 및 클라우드', '전체 매출', '개인컴퓨팅'],
+                    datasets: [{
+                        label: '분기 성장률 (YoY)',
+                        data: [39, 18, 9],
+                        backgroundColor: [
+                            'rgba(22, 163, 74, 0.8)',
+                            'rgba(34, 197, 94, 0.6)',
+                            'rgba(74, 222, 128, 0.5)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true, ticks: { callback: value => value + '%' } } }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한미 관세 협상 결과 및 미래 전략 분석</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 320px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        .flow-step {
+            border: 2px solid #665191;
+            background-color: #fdfdff;
+        }
+        .flow-arrow {
+            color: #665191;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #665191, #d45087, #ffa600);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800">
+
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <div class="text-2xl font-bold text-gray-800">
+                    <span class="gradient-text">한미 관세 협상 분석</span>
+                </div>
+                <div class="hidden md:flex space-x-4">
+                    <a href="#scorecard" class="text-gray-600 hover:text-[#665191] transition">핵심 결과</a>
+                    <a href="#deepdive" class="text-gray-600 hover:text-[#665191] transition">산업별 분석</a>
+                    <a href="#investment" class="text-gray-600 hover:text-[#665191] transition">투자 전략</a>
+                    <a href="#future" class="text-gray-600 hover:text-[#665191] transition">미래 제언</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container mx-auto p-4 md:p-8">
+
+        <section class="text-center my-12 md:my-16">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4">한미 관세 협상, 위기 속에서 길을 찾다</h1>
+            <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">자유무역 시대의 종언과 경제 안보 기반의 관리무역 시대 개막. 이번 협상이 대한민국 경제에 미치는 영향을 심층 분석합니다.</p>
+        </section>
+
+        <section id="scorecard" class="my-16">
+            <h2 class="text-3xl font-bold text-center mb-10">핵심 결과 요약: 숫자로 보는 협상 성적표</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">🚢</div>
+                    <h3 class="text-xl font-bold mb-2">조선업 협력</h3>
+                    <p class="text-4xl font-extrabold text-[#665191]">$1,500억</p>
+                    <p class="text-gray-500 mt-2">규모의 협력 펀드 조성 (WIN)</p>
+                </div>
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">🚗</div>
+                    <h3 class="text-xl font-bold mb-2">자동차 관세</h3>
+                    <p class="text-4xl font-extrabold text-[#d45087]">0% → 15%</p>
+                    <p class="text-gray-500 mt-2">FTA 무관세 혜택 상실 (LOSS)</p>
+                </div>
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">🔬</div>
+                    <h3 class="text-xl font-bold mb-2">반도체/바이오</h3>
+                    <p class="text-3xl font-extrabold text-[#a05195]">최혜국 대우</p>
+                    <p class="text-gray-500 mt-2">관세 불확실성 일부 해소 (CONDITIONAL WIN)</p>
+                </div>
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">🏭</div>
+                    <h3 class="text-xl font-bold mb-2">철강 관세</h3>
+                    <p class="text-4xl font-extrabold text-[#f95d6a]">50% 유지</p>
+                    <p class="text-gray-500 mt-2">고율 관세 환경 고착화 (BIG LOSS)</p>
+                </div>
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">🌾</div>
+                    <h3 class="text-xl font-bold mb-2">농축산 시장</h3>
+                    <p class="text-4xl font-extrabold text-[#2f4b7c]">0% 개방</p>
+                    <p class="text-gray-500 mt-2">핵심 민감 품목 방어 성공 (DEFENSE WIN)</p>
+                </div>
+                <div class="kpi-card text-center">
+                    <div class="text-5xl mb-2">⚡</div>
+                    <h3 class="text-xl font-bold mb-2">에너지 구매</h3>
+                    <p class="text-4xl font-extrabold text-[#ff7c43]">$1,000억</p>
+                    <p class="text-gray-500 mt-2">4년간 미국산 에너지 구매 (TRADE-OFF)</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="deepdive" class="my-20">
+            <h2 class="text-3xl font-bold text-center mb-10">엇갈린 희비: 산업별 득실 심층 분석</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">이번 협상은 산업별로 극명한 명암을 남겼습니다. 각 산업이 마주한 현실과 과제를 차트를 통해 직관적으로 분석합니다.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold mb-4">🚢 조선: 새로운 기회의 바다 (WIN)</h3>
+                    <p class="text-gray-600 mb-4">1,500억 달러 펀드는 미국 시장 진출의 교두보입니다. LNG선 등 고부가가치 선박의 대규모 수주 기대감이 주가를 견인할 강력한 모멘텀으로 작용합니다.</p>
+                    <div class="chart-container">
+                        <canvas id="shipbuildingChart"></canvas>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold mb-4">🚗 자동차: 잃어버린 날개 (LOSS)</h3>
+                    <p class="text-gray-600 mb-4">FTA 무관세 혜택이 사라지면서 일본, EU와 동일한 출발선에 서게 되었습니다. 완성차 업체의 수익성 악화와 부품업체의 위기가 우려됩니다.</p>
+                    <div class="chart-container">
+                        <canvas id="autoChart"></canvas>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold mb-4">🔬 반도체/바이오: 임시 방파제 (CONDITIONAL WIN)</h3>
+                    <p class="text-gray-600 mb-4">최혜국 대우 확보로 최악의 시나리오는 피했지만, '경제 안보' 논리에 따른 리스크는 여전합니다. 기술 동맹 강화가 시급한 과제입니다.</p>
+                    <div class="chart-container">
+                        <canvas id="semiconChart"></canvas>
+                    </div>
+                </div>
+                <div class="kpi-card">
+                    <h3 class="text-2xl font-bold mb-4">🏭 철강: 출구 없는 터널 (BIG LOSS)</h3>
+                    <p class="text-gray-600 mb-4">50% 고율 관세가 유지되며 대미 수출 경쟁력 약화가 고착화되었습니다. 친환경 강재 등 근본적인 체질 개선 없이는 반등이 어렵습니다.</p>
+                    <div class="chart-container">
+                        <canvas id="steelChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="my-20">
+            <h2 class="text-3xl font-bold text-center mb-10">신의 한 수: 협상의 판도를 바꾼 전략</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">모두가 관세율에만 집중할 때, 한국은 '조선업 협력'이라는 혁신적 솔루션으로 판을 흔들었습니다. 이는 단순 방어를 넘어 새로운 시장을 창출한 공격적 협상의 성공 사례입니다.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-0">
+                <div class="flow-step p-4 rounded-lg text-center w-full md:w-1/4">
+                    <h4 class="font-bold">미국의 요구</h4>
+                    <p class="text-sm">무역적자 해소 및 제조업 부흥</p>
+                </div>
+                <div class="text-4xl flow-arrow transform rotate-90 md:rotate-0">→</div>
+                <div class="flow-step p-4 rounded-lg text-center w-full md:w-1/3">
+                    <h4 class="font-bold">한국의 문제 재정의</h4>
+                    <p class="text-sm">'관세 인하'가 아닌 '미국 내 일자리 창출'로 접근</p>
+                </div>
+                <div class="text-4xl flow-arrow transform rotate-90 md:rotate-0">→</div>
+                <div class="flow-step bg-[#665191] text-white p-4 rounded-lg text-center w-full md:w-1/3">
+                    <h4 class="font-bold">혁신적 가치 제안</h4>
+                    <p class="text-sm font-semibold">압도적 조선 기술력으로 美 아젠다 해결, 우리는 실리 확보 (WIN-WIN)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="investment" class="my-20">
+            <h2 class="text-3xl font-bold text-center mb-10">증시 영향과 투자 전략</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">관세 협상 결과는 섹터별 재편을 가속화할 중대 변수입니다. 전문가의 시각으로 본 산업별 투자 매력도를 비교 분석합니다.</p>
+            <div class="kpi-card p-6">
+                <div class="chart-container h-96">
+                    <canvas id="investmentChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="future" class="my-20">
+            <h2 class="text-3xl font-bold text-center mb-10">위기를 기회로: 대한민국의 미래 전략</h2>
+            <p class="text-center text-gray-600 max-w-3xl mx-auto mb-12">변화의 파도를 타고 넘을 새로운 비전과 전략이 필요합니다. Gemini가 제안하는 10대 혁신 아이디어입니다.</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#665191]">1. K-Shipyard in USA</h4>
+                    <p class="text-gray-600">스마트 조선소 패키지 수출</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#665191]">2. Auto-Investment Hedge</h4>
+                    <p class="text-gray-600">부품사 동반 미국 진출 지원</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#665191]">3. 철강 Re-Born</h4>
+                    <p class="text-gray-600">수소환원제철 기술로 미래 선점</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#a05195]">4. MFN+ 반도체 동맹</h4>
+                    <p class="text-gray-600">기술 초격차 유지를 위한 동맹</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#a05195]">5. 에너지 스왑 금융</h4>
+                    <p class="text-gray-600">리스크 헷지 및 국부 창출</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#d45087]">6. KORUS FTA 2.0</h4>
+                    <p class="text-gray-600">디지털/기술/환경 포괄 협상</p>
+                </div>
+                 <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#d45087]">7. 관세 예측 AI</h4>
+                    <p class="text-gray-600">데이터 기반 조기 경보 시스템</p>
+                </div>
+                <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#f95d6a]">8. 역직구 K-Mall</h4>
+                    <p class="text-gray-600">소액 면세 시장 집중 공략</p>
+                </div>
+                 <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#ff7c43]">9. 글로벌 통상 전문가 양성</h4>
+                    <p class="text-gray-600">경제안보 시대 융합형 인재</p>
+                </div>
+                 <div class="kpi-card">
+                    <h4 class="font-bold text-lg text-[#ffa600]">10. '상상력 관세' 외교</h4>
+                    <p class="text-gray-600">소프트파워 활용 신개념 외교</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="my-20 bg-white rounded-lg shadow-lg p-8 md:p-12">
+            <h2 class="text-3xl font-bold text-center mb-6">최종 결론: 새로운 질서, 새로운 기회</h2>
+            <div class="text-center text-gray-600 max-w-4xl mx-auto space-y-6">
+                <p class="text-lg">이번 협상은 **'자유무역' 시대의 종언과 '경제 안보 기반의 관리무역' 시대의 개막**을 알리는 역사적 변곡점입니다. 과거의 성공 방정식은 더 이상 유효하지 않으며, 투자와 정책의 패러다임을 근본적으로 전환해야 합니다.</p>
+                <div class="grid md:grid-cols-3 gap-8 text-left pt-6">
+                    <div class="border-t-4 border-[#665191] pt-4">
+                        <h4 class="font-bold text-xl mb-2">1. 회복탄력성 > 효율성</h4>
+                        <p>지정학적 리스크 속 안정적인 공급망과 기술 자립도를 갖춘 기업에 주목해야 합니다.</p>
+                    </div>
+                    <div class="border-t-4 border-[#d45087] pt-4">
+                        <h4 class="font-bold text-xl mb-2">2. 정부: 전략적 설계자</h4>
+                        <p>'팀 코리아'의 성공 방정식을 위해 국가적 아젠다와 민간 이익이 일치하는 분야를 적극 발굴하고 지원해야 합니다.</p>
+                    </div>
+                    <div class="border-t-4 border-[#ffa600] pt-4">
+                        <h4 class="font-bold text-xl mb-2">3. 자본시장: 신안보 산업 부상</h4>
+                        <p>전통 제조업의 옥석 가리기와 함께 조선, 방산, AI, 친환경 기술 등 새로운 '경제 안보' 산업의 성장에 주목해야 합니다.</p>
+                    </div>
+                </div>
+                <p class="font-semibold text-lg pt-6">결론적으로, 단기적 변동보다 새로운 국제 질서의 본질을 꿰뚫고, 변화의 흐름에 올라탈 수 있는 기업과 산업에 장기적인 안목으로 투자하는 지혜가 그 어느 때보다 필요한 시점입니다.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-4 text-center">
+            <p>&copy; 2025 Data Visualization Report. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400 mt-1">본 자료는 제공된 정보를 바탕으로 생성되었으며, 투자 추천이 아닌 참고 자료로 활용하시기 바랍니다.</p>
+        </div>
+    </footer>
+
+    <script>
+        const brilliantBlues = ['#665191', '#a05195', '#d45087', '#f95d6a', '#ff7c43', '#ffa600', '#2f4b7c', '#003f5c'];
+        const tooltipPlugin = {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                                return label.join(' ');
+                            } else {
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        };
+        const wrapLabel = (label) => {
+            if (typeof label === 'string' && label.length > 16) {
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + word).length > 16 && currentLine.length > 0) {
+                        lines.push(currentLine.trim());
+                        currentLine = '';
+                    }
+                    currentLine += word + ' ';
+                });
+                lines.push(currentLine.trim());
+                return lines;
+            }
+            return label;
+        };
+
+        new Chart(document.getElementById('shipbuildingChart'), {
+            type: 'bar',
+            data: {
+                labels: ['기존 수주 전망', '협상 후 수주 전망'],
+                datasets: [{
+                    label: '향후 5년 수주 전망 (억 달러)',
+                    data: [1200, 1800],
+                    backgroundColor: [brilliantBlues[0], brilliantBlues[5]],
+                    borderColor: [brilliantBlues[0], brilliantBlues[5]],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                ...tooltipPlugin,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('autoChart'), {
+            type: 'line',
+            data: {
+                labels: ['한미 FTA', '관세 협상 후'],
+                datasets: [{
+                    label: '대미 수출차량 관세율 (%)',
+                    data: [0, 15],
+                    fill: false,
+                    borderColor: brilliantBlues[2],
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                ...tooltipPlugin,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 20
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('semiconChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['MFN 확보 품목', '기타 품목'],
+                datasets: [{
+                    label: '대미 수출 비중',
+                    data: [75, 25],
+                    backgroundColor: [brilliantBlues[1], '#e0e0e0'],
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                ...tooltipPlugin
+            }
+        });
+
+        new Chart(document.getElementById('steelChart'), {
+            type: 'bar',
+            data: {
+                labels: ['대한민국', 'EU (쿼터 초과)', '일본 (인수기업)'],
+                datasets: [{
+                    label: '대미 철강 관세율 비교 (%)',
+                    data: [50, 25, 0],
+                    backgroundColor: [brilliantBlues[3], brilliantBlues[4], brilliantBlues[6]],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                ...tooltipPlugin,
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('investmentChart'), {
+            type: 'bar',
+            data: {
+                labels: ['철강', '자동차', '에너지', '반도체/바이오', '조선'],
+                datasets: [{
+                    label: '투자 매력도 점수 (5점 만점)',
+                    data: [1, 2, 3, 4, 5],
+                    backgroundColor: [brilliantBlues[3], brilliantBlues[2], brilliantBlues[4], brilliantBlues[1], brilliantBlues[0]],
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y',
+                plugins: {
+                    ...tooltipPlugin.plugins,
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 5
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

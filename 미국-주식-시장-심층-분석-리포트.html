@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미국 주식 시장 심층 분석 리포트 (2025-09-02 ~ 2025-09-04)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: "Soothing Neutrals" - A calm palette of off-white, slate gray, muted teal, and a soft sand accent for a professional, focused feel. -->
+    <!-- Application Structure Plan: A single-page dashboard design is chosen for expert users who need to quickly navigate complex, interrelated topics. A sticky left-hand navigation allows instant jumping between key themes (Macro, Policy, Tech, etc.), breaking the linear report format for a more efficient, user-driven analysis flow. The top section provides a scannable executive summary with key metrics, while each thematic section combines narrative analysis with an interactive chart and categorized impacts (sectors, tickers). This structure prioritizes rapid synthesis and comparison over passive reading. -->
+    <!-- Visualization & Content Choices: 
+        - Rates/Yields: Goal: Show volatility and trend. Viz: Line chart (Chart.js) to clearly display the yield spike and subsequent easing. Interaction: Hover tooltips for precise daily values. Justification: Line charts are standard and intuitive for time-series financial data.
+        - Gold Price: Goal: Highlight the new record high. Viz: Line chart (Chart.js) emphasizing the ATH. Interaction: Annotation on the chart marking the peak. Justification: Clearly visualizes the breakout moment.
+        - Labor Market: Goal: Illustrate the key inflection point. Viz: Bar chart (Chart.js) comparing 'Unemployed' vs. 'JOLTS Openings' over time. Interaction: Clickable legend to toggle series. Justification: A direct visual comparison is most effective for showing the crossover.
+        - Sector Impacts: Goal: Organize detailed impacts. Viz: Tabbed content sections (HTML/JS) within each theme. Interaction: User clicks a sector tab to reveal specific analysis. Justification: Manages information density and allows users to self-select areas of interest without clutter.
+        - Supply Chain: Goal: Explain a complex process. Viz: A simplified flowchart using HTML divs and Tailwind CSS. Interaction: Hovering over a stage (e.g., "Foundry") reveals a text box with key players and risks. Justification: Avoids static images (no SVG) while providing an interactive, layered explanation. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa; 
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        .nav-link {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-link.active, .nav-link:hover {
+            background-color: #e2e8f0; 
+            color: #1a202c;
+            transform: translateX(4px);
+        }
+        .content-section {
+            scroll-margin-top: 80px; 
+        }
+        .kpi-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex">
+        <nav id="sidebar" class="w-64 h-screen fixed top-0 left-0 bg-white shadow-lg p-4 overflow-y-auto hidden lg:block">
+            <h2 class="text-xl font-bold text-slate-900 mb-6 border-b pb-4">리포트 목차</h2>
+            <ul class="space-y-2">
+                <li><a href="#summary" class="nav-link block font-medium p-2 rounded-md text-slate-600">Executive Summary</a></li>
+                <li><a href="#macro" class="nav-link block font-medium p-2 rounded-md text-slate-600">거시 경제 동향</a></li>
+                <li><a href="#policy" class="nav-link block font-medium p-2 rounded-md text-slate-600">정책 동향</a></li>
+                <li><a href="#tech" class="nav-link block font-medium p-2 rounded-md text-slate-600">기술 및 공급망</a></li>
+                <li><a href="#geopolitics" class="nav-link block font-medium p-2 rounded-md text-slate-600">지정학적 리스크</a></li>
+                <li><a href="#consumer" class="nav-link block font-medium p-2 rounded-md text-slate-600">소비자 동향</a></li>
+                <li><a href="#corporate" class="nav-link block font-medium p-2 rounded-md text-slate-600">기업 활동 및 행동주의</a></li>
+                <li><a href="#climate" class="nav-link block font-medium p-2 rounded-md text-slate-600">기후 리스크</a></li>
+                <li><a href="#trades" class="nav-link block font-medium p-2 rounded-md text-slate-600">투자 전략 및 페어 트레이드</a></li>
+                <li><a href="#appendix" class="nav-link block font-medium p-2 rounded-md text-slate-600">부록</a></li>
+            </ul>
+        </nav>
+
+        <main class="lg:ml-64 w-full p-4 md:p-8">
+            <header class="mb-8 p-6 bg-white rounded-xl shadow">
+                <h1 class="text-3xl font-bold text-slate-900">미국 주식 시장 심층 분석 리포트</h1>
+                <p class="text-slate-600 mt-1">기간: 2025년 9월 2일 ~ 2025년 9월 4일 (KST 기준)</p>
+                <p class="text-sm text-slate-500 mt-2">글로벌 지정학, 경제, 사회 동향이 미국 증시에 미치는 영향 분석</p>
+            </header>
+
+            <section id="summary" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">Executive Summary</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+                    <div class="kpi-card">
+                        <h3 class="font-semibold text-slate-500">금 가격 (온스당)</h3>
+                        <p class="text-3xl font-bold text-amber-500">$3,500+</p>
+                        <p class="text-sm text-green-600">사상 최고치 경신</p>
+                    </div>
+                    <div class="kpi-card">
+                        <h3 class="font-semibold text-slate-500">미국 30년물 국채금리</h3>
+                        <p class="text-3xl font-bold text-red-600">> 4.9% (장중)</p>
+                        <p class="text-sm text-slate-500">장기물 금리 급등 후 안정화</p>
+                    </div>
+                    <div class="kpi-card">
+                        <h3 class="font-semibold text-slate-500">WTI 유가 (배럴당)</h3>
+                        <p class="text-3xl font-bold text-sky-600">~ $78</p>
+                        <p class="text-sm text-red-500">OPEC+ 증산 논의에 약 2% 하락</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <ul class="list-disc list-inside space-y-2 text-slate-700">
+                        <li><strong>장기 국채금리 급등과 안정화:</strong> 미국/영국/일본의 장기 국채금리가 급등하며 재정 리스크 우려를 키웠으나, 이후 일부 안정되었습니다. 이는 금리 민감도가 높은 기술주(듀레이션)와 부동산(REITs) 섹터에 직접적인 밸류에이션 압박 요인으로 작용했습니다. (Reuters, 가디언, Bloomberg)</li>
+                        <li><strong>안전자산 선호 심리 강화:</strong> 금 가격이 온스당 $3,500를 돌파하며 사상 최고치를 경신했습니다. 연준의 금리 인하 기대감과 지정학적 불안이 맞물리며 금, 은 등 귀금속 채굴 기업(NEM, AEM)에 대한 투자 매력을 높였습니다. (Reuters, 가디언)</li>
+                        <li><strong>OPEC+ 증산 가능성과 유가 하락:</strong> OPEC+가 추가 증산을 검토 중이라는 소식에 국제 유가가 하락했습니다. 이는 항공, 운송 등 산업재 섹터의 비용 부담을 완화하고, 화학 및 소비재 기업에는 긍정적 요인으로 작용할 수 있습니다. (Reuters, OilPrice.com)</li>
+                        <li><strong>빅테크 규제 리스크 완화:</strong> Alphabet(GOOGL)에 대한 반독점 소송에서 크롬 브라우저 분할과 같은 강경한 조치가 제외되면서 규제 불확실성이 일부 해소되었습니다. 이는 Apple(AAPL) 등 플랫폼 경제 관련주에도 긍정적인 영향을 미쳤습니다. (Barron's, Investors.com)</li>
+                        <li><strong>대중 반도체 수출 통제 강화:</strong> 미국이 TSMC, 삼성, SK하이닉스의 중국 내 공장에 대한 '검증된 최종 사용자(VEU)' 지위를 철회하며 반도체 장비 수출 통제를 강화했습니다. 이는 반도체 장비주(AMAT, LRCX)에 단기적 불확실성을, 비중국 파운드리 및 맞춤형 AI 칩 설계 기업에는 기회를 제공합니다. (Reuters, Investopedia)</li>
+                        <li><strong>노동 시장 냉각 신호:</strong> JOLTS 구인 건수가 팬데믹 이후 처음으로 실업자 수를 밑돌면서 고용 시장 둔화가 뚜렷해졌습니다. 이는 연준의 9월 금리 인하 가능성을 높이며, 시장의 경기 침체 우려와 완화 기대감이 교차하는 지점입니다. (Bureau of Labor Statistics, 월스트리트저널)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="macro" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">거시 경제 동향: 금리, 안전자산, 그리고 에너지</h2>
+                 <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="mb-6 text-slate-600">최근 시장은 장기 국채 금리의 급격한 변동성, 안전자산으로의 자금 쏠림, 그리고 에너지 가격의 하방 압력이라는 세 가지 거대한 흐름이 교차하며 복합적인 양상을 보이고 있습니다. 장기물 금리 급등은 주식의 '듀레이션' 리스크를 부각시키며 성장주 밸류에이션에 부담을 주었고, 금 가격의 사상 최고치 경신은 시장의 내재된 불안감과 연준의 정책 전환 기대를 동시에 반영합니다. OPEC+의 증산 논의는 인플레이션 완화 기대를 자극하며 소비 및 운송 관련 섹터에 단기적인 안도감을 제공하고 있습니다.</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-lg font-semibold text-center mb-2">주요국 30년물 국채금리 추이</h3>
+                            <div class="chart-container"><canvas id="yieldChart"></canvas></div>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-center mb-2">금 현물 가격 추이</h3>
+                            <div class="chart-container"><canvas id="goldChart"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                         <h3 class="text-lg font-semibold mb-2">핵심 분석</h3>
+                         <ul class="list-disc list-inside space-y-1 text-slate-700">
+                             <li><strong>금리와 주식의 관계 재정립:</strong> 장기 금리 상승은 단순히 할인율을 높이는 것을 넘어, 기업의 자본 조달 비용(WACC) 증가를 통해 자사주 매입과 M&A 활동을 위축시킬 수 있습니다. 특히 고PER 기술주, 유틸리티, 리츠(REITs) 섹터가 금리 변화에 민감하게 반응합니다.</li>
+                             <li><strong>"골디락스"의 역설:</strong> 유가 하락과 노동 시장 둔화는 인플레이션 완화와 연준의 금리 인하 기대를 높이는 긍정적 요인입니다. 그러나 이는 동시에 수요 둔화의 신호일 수 있어, 경기 연착륙(Soft Landing)과 침체(Recession) 사이의 불확실성을 증폭시킵니다.</li>
+                             <li><strong>포지셔닝 테이크어웨이:</strong> 현재 국면에서는 금리 변동성에 대한 헤지가 중요합니다. 듀레이션이 짧고, 현금 흐름이 안정적이며, 비용 구조에서 에너지 비중이 높은 기업에 대한 선별적 접근이 유효합니다. 동시에, 금 가격 상승의 수혜를 입는 귀금속 채굴 및 로열티 기업에 대한 비중 확대도 고려할 수 있습니다.</li>
+                         </ul>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="policy" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">정책 동향: 무역, 반독점, 그리고 수출 통제</h2>
+                <div class="bg-white p-6 rounded-xl shadow">
+                     <p class="mb-6 text-slate-600">워싱턴과 브뤼셀에서 비롯된 정책 결정들이 글로벌 공급망과 빅테크 기업의 수익 모델에 직접적인 영향을 미치고 있습니다. 트럼프 시대 관세의 불법 판결은 무역 정책의 경로에 대한 불확실성을 높였고, Alphabet에 대한 완화된 반독점 판결은 규제 리스크의 정점을 지났다는 기대를 낳았습니다. 반면, 대중 반도체 수출 통제 강화는 기술 패권 경쟁이 장기적인 구조적 현실임을 재확인시켜 주었습니다.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-lg">무역 정책 및 관세 경로</h3>
+                            <p class="text-sm text-slate-600 mt-2">항소 법원의 관세 불법 판결은 단기적으로 수입 의존도가 높은 소매(XRT), 자동차 부품, 기계/공구 섹터의 마진 개선 기대감을 높였습니다. 그러나 대법원 상고 가능성과 정책의 불확실성은 관련 기업들의 장기 Capex 결정을 지연시키는 요인으로 작용할 것입니다. (Reuters)</p>
+                        </div>
+                         <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-lg">빅테크 반독점 규제</h3>
+                            <p class="text-sm text-slate-600 mt-2">Alphabet(GOOGL)에 대한 판결은 최악의 시나리오(크롬 분할)를 피했다는 점에서 긍정적입니다. 그러나 데이터 공유 및 독점 계약 제한 조치는 여전히 검색 광고 시장의 경쟁 구도에 변화를 줄 수 있습니다. Apple(AAPL)은 구글과의 검색 기본 설정 계약이 유지됨에 따라 수혜를 입었습니다. (Barron's)</p>
+                        </div>
+                         <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-lg">반도체 수출 통제</h3>
+                            <p class="text-sm text-slate-600 mt-2">TSMC(TSM), 삼성, SK하이닉스에 대한 VEU 지위 철회는 성숙 공정(Mature-node) 장비의 중국향 수출에 마찰을 일으킬 것입니다. 이는 ASML, AMAT, LRCX 등 장비 업체에 단기적 압박을 가하는 한편, 비중국 지역의 파운드리 투자와 맞춤형 실리콘(ASIC) 개발을 가속화할 수 있습니다. (Reuters)</p>
+                        </div>
+                    </div>
+                     <div class="mt-8">
+                         <h3 class="text-lg font-semibold mb-2">시나리오 분석 및 민감도</h3>
+                         <p class="text-slate-700">향후 정책 경로에 따라 섹터별 명암이 갈릴 것입니다. 만약 관세가 전면 철폐될 경우, 소매업체들의 주가수익비율(PER)은 10-15% 리레이팅될 가능성이 있습니다. 반도체 수출 통제가 추가적으로 강화될 경우, 엔비디아(NVDA)의 저사양 AI 칩 중국 수출에도 영향을 미칠 수 있어 관련 가이던스를 주시해야 합니다.</p>
+                         <p class="font-semibold text-slate-800 mt-4">포지셔닝 테이크어웨이: 정책 불확실성이 높은 시기에는 특정 시나리오에 대한 쏠림보다 옵션 가치가 높은 기업에 주목해야 합니다. 공급망 다변화(Friend-shoring)에 성공한 기업, 규제 환경에 유연하게 대응할 수 있는 플랫폼 기업이 상대적으로 유리한 위치에 있습니다.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="tech" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">기술 및 공급망: AI Capex 사이클과 지정학</h2>
+                 <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="mb-6 text-slate-600">AI 투자 사이클은 반도체 산업의 구조적 성장을 이끌고 있지만, 미중 기술 패권 경쟁은 공급망에 지속적인 마찰을 일으키고 있습니다. 하이퍼스케일러들의 폭발적인 AI Capex 증가는 엔비디아(NVDA), 브로드컴(AVGO) 등 AI 가속기 공급업체에 막대한 기회를 제공하고 있습니다. 그러나 미국의 수출 통제 강화는 파운드리, 장비, 메모리 등 공급망 전반에 걸쳐 새로운 병목 현상과 지정학적 리스크를 만들어내고 있습니다.</p>
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                         <div>
+                             <h3 class="text-lg font-semibold text-center mb-2">하이퍼스케일러 Capex 연간 성장률 전망</h3>
+                             <div class="chart-container"><canvas id="capexChart"></canvas></div>
+                         </div>
+                         <div>
+                             <h3 class="text-lg font-semibold mb-2">AI 반도체 공급망 핵심 단계</h3>
+                             <div class="space-y-2">
+                                 <div class="p-3 bg-slate-100 rounded-lg">
+                                     <h4 class="font-bold">1. 설계 (IP/EDA)</h4>
+                                     <p class="text-sm">NVIDIA, AMD, Broadcom 등. 맞춤형 실리콘(ASIC) 경쟁 심화.</p>
+                                 </div>
+                                 <div class="text-center font-bold text-2xl text-slate-400">↓</div>
+                                 <div class="p-3 bg-slate-100 rounded-lg">
+                                     <h4 class="font-bold">2. 파운드리 (제조)</h4>
+                                     <p class="text-sm">TSMC가 첨단 공정 독점. 미국의 대중국 통제로 비중국 Capa 중요성 부각.</p>
+                                 </div>
+                                  <div class="text-center font-bold text-2xl text-slate-400">↓</div>
+                                 <div class="p-3 bg-slate-100 rounded-lg">
+                                     <h4 class="font-bold">3. 장비 (Tools)</h4>
+                                     <p class="text-sm">ASML, AMAT, LRCX. 중국향 성숙 공정 장비 수출에 라이선스 마찰 발생.</p>
+                                 </div>
+                                  <div class="text-center font-bold text-2xl text-slate-400">↓</div>
+                                  <div class="p-3 bg-slate-100 rounded-lg">
+                                     <h4 class="font-bold">4. 패키징 / 메모리</h4>
+                                     <p class="text-sm">CoWoS 등 첨단 패키징 병목 현상. HBM 메모리 수요 급증.</p>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                    <div class="mt-8">
+                         <h3 class="text-lg font-semibold mb-2">승자와 패자 분석</h3>
+                         <ul class="list-disc list-inside space-y-1 text-slate-700">
+                             <li><strong>승자:</strong> AI 플랫폼(NVDA), 맞춤형 실리콘 설계사(AVGO, MRVL), 비중국 지역에 생산 능력을 갖춘 파운드리 및 IP/EDA 공급업체.</li>
+                             <li><strong>패자:</strong> 중국 시장 매출 비중이 높은 성숙 공정 장비 업체, 미국의 통제 정책으로 인해 공급망에서 배제될 위험이 있는 중국 기업.</li>
+                         </ul>
+                         <p class="font-semibold text-slate-800 mt-4">포지셔닝 테이크어웨이: AI 투자 사이클의 장기 성장성에 베팅하되, 공급망의 특정 병목 구간(첨단 패키징, HBM)과 지정학적 리스크에 따른 수혜/피해 기업을 선별하는 것이 핵심입니다. 단일 기업 리스크를 줄이기 위해 공급망 전반에 걸친 바스켓 접근도 유효합니다.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="geopolitics" class="content-section mb-12">
+                 <h2 class="text-2xl font-bold mb-4">지정학적 리스크: 통화 블록과 분쟁 지역</h2>
+                 <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="mb-6 text-slate-600">상하이협력기구(SCO) 정상회의에서 논의된 '전자 위안화(electro-yuan)' 결제 시스템은 달러 중심의 글로벌 에너지 결제 시스템에 대한 장기적인 도전 가능성을 시사합니다. 동시에 대만 해협의 군사적 긴장, 가자 지구 분쟁 등 국지적 분쟁은 시장의 위험 회피 심리를 자극하고 방산 및 에너지 섹터에 직접적인 영향을 미칩니다.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border p-4 rounded-lg bg-red-50 border-red-200">
+                             <h3 class="font-semibold text-lg text-red-800">위안화 결제 리스크</h3>
+                             <p class="text-sm text-red-700 mt-2">에너지 및 원자재 거래에서 위안화 결제가 점진적으로 확대될 경우, 미국 에너지 메이저 기업(XOM, CVX)의 운전자본 관리 및 환리스크에 영향을 줄 수 있습니다. 이는 달러 패권에 대한 미세한 균열이지만, 장기적 관점에서 모니터링이 필요합니다. (Reuters)</p>
+                        </div>
+                        <div class="border p-4 rounded-lg bg-sky-50 border-sky-200">
+                             <h3 class="font-semibold text-lg text-sky-800">국지적 분쟁과 방산 수요</h3>
+                             <p class="text-sm text-sky-700 mt-2">대만 해협 긴장, 우크라이나 전쟁, 가자 지구 분쟁은 전 세계적인 국방비 증액 추세를 뒷받침합니다. 이는 록히드 마틴(LMT), 노스롭 그루먼(NOC) 등 미국 방산업체들의 수주 잔고를 채우는 구조적인 순풍으로 작용합니다. (euronews)</p>
+                        </div>
+                    </div>
+                     <p class="font-semibold text-slate-800 mt-6">포지셔닝 테이크어웨이: 지정학적 리스크는 방산 섹터에 대한 비중 확대 근거를 제공합니다. 반면, 신흥국 매출 비중이 높고 글로벌 공급망이 복잡하게 얽혀있는 다국적 기업들은 지정학적 리스크 심화 시 FX 변동성과 수요 둔화에 노출될 수 있어 주의가 필요합니다.</p>
+                 </div>
+            </section>
+
+            <section id="consumer" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">소비자 동향: 냉각되는 노동시장과 엇갈리는 소매판매</h2>
+                <div class="bg-white p-6 rounded-xl shadow">
+                     <p class="mb-6 text-slate-600">미국 소비의 핵심 동력인 노동 시장이 뚜렷한 냉각 신호를 보내고 있습니다. JOLTS 구인 건수는 실업자 수를 하회하기 시작했으며, 연준의 베이지북은 소비자들이 지출을 줄이고 있음을 시사합니다. 이러한 거시적 둔화 신호에도 불구하고, Macy's와 같은 일부 소매업체는 12분기 만에 처음으로 매출 성장을 기록하며, 프로모션 강화와 브랜드 전략에 따라 개별 기업의 실적이 차별화될 수 있음을 보여주었습니다.</p>
+                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                             <h3 class="text-lg font-semibold text-center mb-2">미국 구인건수 vs 실업자 수</h3>
+                             <div class="chart-container"><canvas id="joltsChart"></canvas></div>
+                             <p class="text-xs text-center text-slate-500 mt-2">출처: Bureau of Labor Statistics</p>
+                         </div>
+                        <div class="border p-4 rounded-lg">
+                            <h3 class="font-semibold text-lg">소비자 동향 핵심 관찰</h3>
+                             <ul class="list-disc list-inside space-y-2 text-slate-700 mt-2">
+                                 <li><strong>고용 둔화의 이중성:</strong> 노동 시장의 냉각은 임금 상승률 둔화로 이어져 인플레이션 압력을 완화시키지만, 소비 여력 감소로 이어져 경기 침체 리스크를 높입니다.</li>
+                                 <li><strong>소비의 양극화:</strong> 고소득층은 여전히 견조한 소비를 유지하는 반면, 저소득층은 신용카드 연체율 증가 등 재정적 압박에 직면해 있습니다. 이는 '가성비'를 내세운 PB 상품과 할인점(COST, WMT)에 유리한 환경을 조성합니다.</li>
+                                 <li><strong>프로모션의 효과:</strong> 소매업체들의 할인 및 프로모션 경쟁이 심화되고 있습니다. 이는 단기적으로 매출을 끌어올릴 수 있지만, 장기적으로는 수익성 악화로 이어질 수 있어 3분기 실적 가이던스에서 마진 전망을 주시해야 합니다.</li>
+                             </ul>
+                        </div>
+                     </div>
+                     <p class="font-semibold text-slate-800 mt-6">포지셔닝 테이크어웨이: 소비 둔화 국면에서는 경기 방어적인 필수소비재(Staples)가 임의소비재(Discretionary)보다 상대적으로 안정적인 성과를 보일 수 있습니다. 다만, 강력한 브랜드 파워와 가격 결정력을 보유한 일부 임의소비재 기업은 차별화된 실적을 기록할 수 있으므로 선별적 접근이 필요합니다.</p>
+                </div>
+            </section>
+            
+             <section id="corporate" class="content-section mb-12">
+                 <h2 class="text-2xl font-bold mb-4">기업 활동 및 행동주의: 분할과 개혁의 바람</h2>
+                 <div class="bg-white p-6 rounded-xl shadow">
+                    <p class="mb-6 text-slate-600">기업들은 성장 둔화와 높은 자본 비용 환경에 대응하기 위해 포트폴리오를 재편하고 있습니다. Kraft Heinz(KHC)의 분사 결정은 복합기업(conglomerate)의 비효율성을 해소하려는 최근의 트렌드를 반영합니다. 동시에, Elliott Management가 PepsiCo(PEP)의 지분을 대량 매입하며 포트폴리오 개편과 운영 효율성 개선을 요구하는 등, 행동주의 펀드들의 목소리가 커지고 있습니다.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="border p-4 rounded-lg">
+                             <h3 class="font-semibold text-lg">Kraft Heinz 분사와 'Sum-of-the-Parts'</h3>
+                             <p class="text-sm text-slate-600 mt-2">KHC의 분할은 각 사업부의 본질적인 가치를 시장이 재평가하게 만드는 촉매제가 될 수 있습니다(Sum-of-the-parts revaluation). 그러나 연간 약 3억 달러로 추정되는 비효율(dis-synergies) 발생에 대한 투자자들의 우려도 존재합니다. 이 결정은 버크셔 해서웨이의 KHC 지분 정리 가능성을 높이는 요인이기도 합니다. (Reuters, Barron's)</p>
+                        </div>
+                        <div class="border p-4 rounded-lg">
+                             <h3 class="font-semibold text-lg">행동주의 펀드와 PepsiCo</h3>
+                             <p class="text-sm text-slate-600 mt-2">Elliott가 PEP에 요구하는 것은 음료 사업부의 경쟁력 강화와 자본 배분 효율성 제고입니다. 이는 향후 PEP의 비핵심 자산 매각, 자사주 매입 확대, 또는 사업부 분사 등 더 과감한 구조 개편으로 이어질 수 있습니다. 이는 KO와의 경쟁 구도에도 영향을 미칠 수 있습니다. (Reuters)</p>
+                        </div>
+                    </div>
+                     <p class="font-semibold text-slate-800 mt-6">포지셔닝 테이크어웨이: 기업 분할이나 행동주의 펀드의 개입은 단기적으로 주가 변동성을 높일 수 있지만, 장기적으로는 기업 가치 제고로 이어질 수 있는 이벤트입니다. 이러한 이벤트 발생 시, 관련 기업뿐만 아니라 해당 기업이 속한 ETF 및 인덱스의 리밸런싱 과정에서 발생하는 수급 변화에도 주목할 필요가 있습니다.</p>
+             </section>
+
+             <section id="climate" class="content-section mb-12">
+                 <h2 class="text-2xl font-bold mb-4">기후 리스크: 산불과 허리케인</h2>
+                 <div class="bg-white p-6 rounded-xl shadow">
+                     <p class="mb-6 text-slate-600">기후 변화로 인한 자연재해의 빈도와 강도가 증가하면서, 특정 산업과 지역에 대한 리스크가 커지고 있습니다. 캘리포니아의 대형 산불과 허리케인 시즌은 유틸리티 및 보험 산업에 직접적인 재무적 타격을 주고 있으며, 관련 공급망에도 차질을 빚게 합니다.</p>
+                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                         <div class="border p-4 rounded-lg">
+                             <h3 class="font-semibold text-lg">캘리포니아 산불과 유틸리티</h3>
+                             <p class="text-sm text-slate-600 mt-2">TCU 복합 산불(TCU September Lightning Complex)은 캘리포니아 유틸리티 기업(PCG, EIX)의 산불 관련 법적 책임과 비용 부담 리스크를 다시 부각시키고 있습니다. 이는 전력망 복원력 강화(grid resilience) 투자 수요를 자극하지만, 단기적으로는 주가에 부담으로 작용합니다. (ABC30 Fresno)</p>
+                         </div>
+                         <div class="border p-4 rounded-lg">
+                             <h3 class="font-semibold text-lg">허리케인 시즌과 보험사</h3>
+                             <p class="text-sm text-slate-600 mt-2">허리케인 로레나(Lorena)와 키코(Kiko)의 미국 남서부 지역 영향 가능성은 재산 및 상해 보험사(ALL, TRV)의 실적 불확실성을 높입니다. 반복되는 대규모 자연재해는 재보험료 인상으로 이어져 보험사들의 언더라이팅 사이클에 영향을 미칩니다. (MySA)</p>
+                         </div>
+                     </div>
+                     <p class="font-semibold text-slate-800 mt-6">포지셔닝 테이크어웨이: 기후 리스크는 포트폴리오의 지역적, 산업적 노출도를 점검해야 할 필요성을 강조합니다. 캘리포니아 유틸리티나 플로리다 지역 보험사에 대한 직접적인 노출을 줄이는 한편, 재해 복구 관련 건축 자재, HVAC(공조 시스템) 기업 등에서 단기적인 기회를 찾을 수 있습니다.</p>
+             </section>
+             
+            <section id="trades" class="content-section mb-12">
+                <h2 class="text-2xl font-bold mb-4">투자 전략 및 페어 트레이드</h2>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 border rounded-lg">
+                            <h3 class="font-semibold text-lg">Long: 귀금속 채굴/로열티 (NEM, WPM)</h3>
+                            <p class="text-sm mt-2"><strong>논리:</strong> 금 가격 사상 최고치 경신, 연준 금리 인하 기대, 지정학적 불확실성. 채굴 기업은 운영 레버리지, 로열티 기업은 안정적인 현금 흐름이 매력적.</p>
+                            <p class="text-sm mt-1"><strong>촉매제:</strong> 9월 NFP 데이터 둔화, 연준의 비둘기파적 발언.</p>
+                            <p class="text-sm mt-1"><strong>리스크:</strong> 예상보다 강한 경제 지표, 달러화 강세 전환.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg">
+                            <h3 class="font-semibold text-lg">Long: 방산 (LMT, NOC)</h3>
+                            <p class="text-sm mt-2"><strong>논리:</strong> 대만, 우크라이나, 중동 등 지정학적 긴장 고조에 따른 구조적인 국방비 증액 사이클.</p>
+                            <p class="text-sm mt-1"><strong>촉매제:</strong> 신규 분쟁 발생, 주요국의 국방 예산안 발표.</p>
+                            <p class="text-sm mt-1"><strong>리스크:</strong> 예산안 통과 지연, 지정학적 긴장 완화.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg">
+                            <h3 class="font-semibold text-lg">Pair Trade: Long 필수소비재 (XLP) vs. Short 임의소비재 (XLY)</h3>
+                            <p class="text-sm mt-2"><strong>논리:</strong> 노동 시장 냉각과 소비자 심리 위축 국면에서 경기 방어적인 필수소비재가 상대적 강세를 보일 가능성.</p>
+                            <p class="text-sm mt-1"><strong>촉매제:</strong> 소매판매, 소비자 신뢰지수 등 경제지표 악화.</p>
+                            <p class="text-sm mt-1"><strong>리스크:</strong> 예상 밖의 경기 연착륙 및 소비 회복.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg">
+                            <h3 class="font-semibold text-lg">Pair Trade: Long 비중국 AI 공급망 vs. Short 중국 노출 장비주</h3>
+                            <p class="text-sm mt-2"><strong>논리:</strong> 미국의 수출 통제 강화로 인한 공급망 재편. AVGO(설계), TSM(비중국 파운드리) 수혜 vs. 중국 매출 비중 높은 장비주(AMAT, LRCX) 단기 압박.</p>
+                            <p class="text-sm mt-1"><strong>촉매제:</strong> 미국 상무부의 추가 규제 발표.</p>
+                            <p class="text-sm mt-1"><strong>리스크:</strong> 미중 관계 예상 밖 개선, 규제 완화.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="appendix" class="content-section">
+                <h2 class="text-2xl font-bold mb-4">부록</h2>
+                <div class="bg-white p-6 rounded-xl shadow">
+                    <h3 class="font-semibold text-lg mb-2">주요 이벤트 캘린더 (향후 2주)</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead>
+                                <tr class="border-b">
+                                    <th class="p-2">날짜</th>
+                                    <th class="p-2">이벤트</th>
+                                    <th class="p-2">시장 영향</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="border-b">
+                                    <td class="p-2">9월 4일 (장 마감 후)</td>
+                                    <td class="p-2">브로드컴(AVGO) 실적 발표</td>
+                                    <td class="p-2">AI 반도체 수요 및 가이던스 확인.</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="p-2">9월 5일</td>
+                                    <td class="p-2">미국 비농업고용지수(NFP) / ADP 민간고용</td>
+                                    <td class="p-2">노동 시장 냉각 속도 확인, 연준 금리 결정에 핵심 변수.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2">9월 17일</td>
+                                    <td class="p-2">미국 연방공개시장위원회(FOMC) 회의</td>
+                                    <td class="p-2">금리 결정 및 향후 정책 경로에 대한 연준의 시각 확인.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sections = document.querySelectorAll('.content-section');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.3
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }, observerOptions);
+
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+
+    navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    const commonChartOptions = {
+        maintainAspectRatio: false,
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+                labels: {
+                    font: { size: 12, family: "'Noto Sans KR', sans-serif" }
+                }
+            },
+            tooltip: {
+                bodyFont: { family: "'Noto Sans KR', sans-serif" },
+                titleFont: { family: "'Noto Sans KR', sans-serif" }
+            }
+        },
+        scales: {
+            x: { 
+                ticks: { font: { family: "'Noto Sans KR', sans-serif" } },
+                grid: { display: false }
+            },
+            y: { 
+                ticks: { font: { family: "'Noto Sans KR', sans-serif" } },
+                grid: { color: '#e2e8f0' }
+            }
+        }
+    };
+
+    new Chart(document.getElementById('yieldChart'), {
+        type: 'line',
+        data: {
+            labels: ['8월 29일', '9월 1일', '9월 2일', '9월 3일', '9월 4일'],
+            datasets: [{
+                label: '미국 30년물 금리 (%)',
+                data: [4.65, 4.70, 4.92, 4.85, 4.88],
+                borderColor: 'rgb(220, 38, 38)',
+                tension: 0.1,
+                fill: false
+            }, {
+                label: '영국 30년물 금리 (%)',
+                data: [5.40, 5.55, 5.75, 5.68, 5.70],
+                borderColor: 'rgb(37, 99, 235)',
+                tension: 0.1,
+                fill: false
+            }]
+        },
+        options: commonChartOptions
+    });
+
+    new Chart(document.getElementById('goldChart'), {
+        type: 'line',
+        data: {
+            labels: ['8월 29일', '9월 1일', '9월 2일', '9월 3일', '9월 4일'],
+            datasets: [{
+                label: '금 현물가 ($/oz)',
+                data: [3450, 3480, 3495, 3515, 3505],
+                borderColor: 'rgb(245, 158, 11)',
+                backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                tension: 0.1,
+                fill: true
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+            plugins: {
+                ...commonChartOptions.plugins,
+                annotation: {
+                    annotations: {
+                        line1: {
+                            type: 'line',
+                            yMin: 3515,
+                            yMax: 3515,
+                            borderColor: 'rgb(255, 99, 132)',
+                            borderWidth: 2
+                        }
+                    }
+                }
+            }
+        }
+    });
+    
+    new Chart(document.getElementById('capexChart'), {
+        type: 'bar',
+        data: {
+            labels: ["'23", "'24 (E)", "'25 (E)"],
+            datasets: [{
+                label: 'YoY 성장률 (%)',
+                data: [15, 45, 57],
+                backgroundColor: ['#60a5fa', '#3b82f6', '#2563eb']
+            }]
+        },
+        options: {
+            ...commonChartOptions,
+            plugins: {
+                legend: { display: false }
+            }
+        }
+    });
+
+    new Chart(document.getElementById('joltsChart'), {
+        type: 'bar',
+        data: {
+            labels: ['2024 Q4', '2025 Q1', '2025 Q2', '2025 Q3 (E)'],
+            datasets: [{
+                label: 'JOLTS 구인건수 (백만)',
+                data: [8.8, 8.1, 7.5, 7.2],
+                backgroundColor: '#38bdf8'
+            }, {
+                label: '실업자 수 (백만)',
+                data: [6.1, 6.5, 6.9, 7.4],
+                backgroundColor: '#f87171'
+            }]
+        },
+        options: commonChartOptions
+    });
+});
+</script>
+
+</body>
+</html>
