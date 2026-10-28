@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>리포트 목록</title>
+<style>
+  :root { --bg: #f6f5f1; --fg: #1d1d1b; --muted: #6b6b66; --card: #ffffff; --line: #e2e0d9; --accent: #1f5fbf; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #16171a; --fg: #ececea; --muted: #a2a29c; --card: #1f2024; --line: #33343a; --accent: #7fb0ff; }
+  }
+  :root[data-theme="dark"] { --bg: #16171a; --fg: #ececea; --muted: #a2a29c; --card: #1f2024; --line: #33343a; --accent: #7fb0ff; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif; line-height: 1.6; }
+  main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
+  h1 { font-size: 1.6rem; margin: 0 0 8px; }
+  p.lead { color: var(--muted); margin: 0 0 28px; }
+  h2 { font-size: 1.05rem; margin: 28px 0 10px; color: var(--muted); font-weight: 600; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 10px; }
+  li a { display: block; padding: 14px 16px; color: var(--fg); text-decoration: none; }
+  li a:hover { color: var(--accent); }
+  li small { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>리포트 목록</h1>
+  <p class="lead">이 저장소에 올린 HTML 리포트를 한곳에서 엽니다.</p>
+
+  <h2>부동산</h2>
+  <ul>
+    <li><a href="dongtan-acmer-cheongyak-report.html">17억 분양가는 동탄 급등을 이미 반영했다: 아크메르 동탄 청약 타당성 분석<small>2026년 10월 28일 기준. 동탄 시장 동향, 주변 시세, 찬반 의견, 세법과 금융 규제, 타당성 스코어를 담았습니다.</small></a></li>
+  </ul>
+
+  <h2>투자·경제</h2>
+  <ul>
+    <li><a href="미국-주식-시장-심층-분석-리포트.html">미국 주식 시장 심층 분석 리포트</a></li>
+    <li><a href="미국IT대형주4인방단기전망.html">미국 IT 대형주 4인방 단기 전망</a></li>
+    <li><a href="미국_증시_Daily_Pre-Open_Report_250820.html">미국 증시 Daily Pre-Open Report (2025-08-20)</a></li>
+    <li><a href="K-방산_중장기_투자_전략.html">K-방산 중장기 투자 전략</a></li>
+    <li><a href="관세협상리포트.html">관세 협상 리포트</a></li>
+    <li><a href="2025년_노란봉투법_심층분석.html">2025년 노란봉투법 심층 분석</a></li>
+  </ul>
+
+  <h2>기술</h2>
+  <ul>
+    <li><a href="피지컬AI에_대하여.html">피지컬 AI에 대하여</a></li>
+    <li><a href="nividia-socamm.html">NVIDIA SOCAMM</a></li>
+    <li><a href="AI-Driven_TDD.html">AI-Driven TDD</a></li>
+    <li><a href="AI_Assistant를_활용한_테스트_주도_개발.html">AI Assistant를 활용한 테스트 주도 개발</a></li>
+    <li><a href="TDD-vibe_Coding.html">TDD와 Vibe Coding</a></li>
+  </ul>
+</main>
+</body>
+</html>
